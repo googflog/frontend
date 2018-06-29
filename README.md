@@ -1,14 +1,17 @@
-##開発
+## 開発
+
 <!-- `gulp dev-pc` -->
 <!-- `gulp dev-sp` -->
 `npm run dev`
 
 
-##ステージング
+## ステージング
+
 `npm run stage`
 
 
-##公開版
+## 公開版
+
 `npm run release`
 
 
