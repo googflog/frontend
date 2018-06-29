@@ -1,0 +1,14 @@
+@charset "UTF-8";
+@import '_reboot';
+
+body{
+  // background: yellow;
+  background: url($imgPath + "testn.jpg");
+  *::selection {
+    background: yellow;
+  }
+}
+
+h1{
+  color: aquamarine;
+}

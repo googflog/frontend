@@ -1,0 +1,31 @@
+meta(charset="UTF-8")
+meta(http-equiv="X-UA-Compatible" content="IE=edge")
+title= page.title ? page.title : SITE_NAME
+meta(name="description" content= page.description ? page.description : SITE_DESCRIPTION)
+meta(name="keywords" content= page.keywords ? page.keywords : SITE_KEYWORDS)
+meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+link(rel="shortcut icon" href= IMAGES_PATH + "common/favicon.ico")//- size(32x32)
+link(rel="apple-touch-icon" href= IMAGES_PATH + "common/ogp.png")//- size(180x180)
+
+meta(property="og:url" content= page.ogpUrl ? page.ogpUrl : SITE_OGP_URL)
+meta(property="og:title" content= page.ogpTitle ? page.ogpTitle : SITE_OGP_TITLE)
+meta(property="og:description" content= page.ogpDescription ? page.ogpDescription : SITE_OGP_DESCRIPTION)
+meta(property="og:image" content= page.ogpImage ? page.ogpImage : SITE_OGP_IMAGE)//- size(1200x630推奨)
+meta(property="og:site_name" content= page.ogpSiteName ? page.ogpSiteName : SITE_OGP_SITE_NAME)
+meta(property="og:type" content= page.ogpType ? page.ogpType : SITE_OGP_TYPE)
+meta(property="og:locale" content= page.ogpLocale ? page.ogpLocale : SITE_OGP_LOCALE)
+meta(property="fb:app_id" content= page.ogpAppID ? page.ogpAppID : SITE_OGP_APP_ID)
+//-
+meta(name="twitter:card" content="summary_large_image")
+meta(name="twitter:title" content= page.ogpTitle ? page.ogpTitle : SITE_OGP_TITLE)
+meta(name="twitter:description" content= page.ogpDescription ? page.ogpDescription : SITE_OGP_DESCRIPTION)
+meta(name="twitter:image" content= page.ogpImage ? page.ogpImage : SITE_OGP_IMAGE)
+link(rel="stylesheet" href= CSS_PATH + "app.css"+ VERSION)
+if Array.isArray(page.styles)
+  each style in page.styles
+    link(rel="stylesheet" href= style + VERSION)
+
+// Global Site Tag (gtag.js) - Google Analytics
+<script async src="https://www.googletagmanager.com/gtag/js?id=#{GA_ID}"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag('js', new Date());gtag('config', '#{GA_ID}');</script>
