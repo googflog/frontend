@@ -14,10 +14,15 @@
 
 `npm run release`
 
+### メモ
+TODO: SPとPCでページが分かれる場合はどうする？
 
-//TODO: SPとPCでページが分かれる場合はどうする？
-//TODO: スタイルガイドとか作れるようにする？
-//TODO: FLOCSS？
-//TODO: CSSブレイクポイント
-//TODO: JSブレイクポイント
-//TODO: JSデモ
+TODO: スタイルガイドとか作れるようにする？
+
+TODO: FLOCSS？
+
+TODO: CSSブレイクポイント
+
+TODO: JSブレイクポイント
+
+TODO: JSデモ
