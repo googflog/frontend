@@ -112,7 +112,7 @@ gulp.task('sass', function() {
         errorHandler: notify.onError("Error: <%= error.message %>")
       }))
       .pipe(sassVariables({
-        $imgPath: IMAGES_PATH
+        $IMAGES_PATH: IMAGES_PATH
       }))
       .pipe(sass({
         outputStyle: 'compressed'
@@ -126,7 +126,7 @@ gulp.task('sass', function() {
       }))
       .pipe(sourcemaps.init())
       .pipe(sassVariables({
-        $imgPath: IMAGES_PATH
+        $IMAGES_PATH: IMAGES_PATH
       }))
       .pipe(sass({
         outputStyle: 'expanded'

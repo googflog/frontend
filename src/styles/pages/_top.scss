@@ -1,0 +1,22 @@
+
+$page_class: page-top;
+$imgPath: $IMAGES_PATH;
+
+.#{$page_class}
+{
+  font-size: 1.5rem;
+  background: url($imgPath + 'testn.jpg' ) ;
+  color: #fff;
+  .test1{
+    font-size: 2em;
+    strong{
+      font-size: 2em;
+    }
+  }
+  .test2{
+    font-size: 2rem;
+    strong{
+      font-size: 2rem;
+    }
+  }
+}

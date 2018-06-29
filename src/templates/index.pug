@@ -1,0 +1,41 @@
+extends ./_base/_layout
+
+append vars
+  -
+    page.id = 'top'
+
+    page.title = ''
+    page.description = ''
+    page.keywords = ''
+
+    page.ogpUrl = ''
+    page.ogpTitle = ''
+    page.ogpDescription = ''
+    page.ogpImage = ''
+    page.ogpSiteName = ''
+    page.ogpType = ''
+    page.ogpLocale = ''
+    page.ogpAppID = ''
+
+    // page.styles = [CSS_PATH + 'top.css']
+    // page.scripts = [JS_PATH + 'top.js']
+
+
+block content
+  h1 Pug - node template engine
+  #container.col
+    if youAreUsingPug
+      p You are amazing
+    else
+      p Get on it!
+    .columns
+      .column
+        p.test1 Pug is a terse and <strong>simple</strong> templating language with
+      .column
+        p.test2 Pug is a terse and <strong>simple</strong> templating language with
+    #youtube
+    .columns
+      .column
+        a.button.is-large(href="bulma") BlumaTest
+      .column
+        a.button.is-large(href="contact") CONTACT

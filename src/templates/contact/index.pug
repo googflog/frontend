@@ -1,8 +1,8 @@
-extends ./_base/_layout
+extends ../_base/_layout
 
 append vars
   -
-    page.id = 'top'
+    page.id = 'contact'
 
     page.title = ''
     page.description = ''
@@ -20,6 +20,7 @@ append vars
     // page.styles = [CSS_PATH + 'top.css']
     // page.scripts = [JS_PATH + 'top.js']
 
+  - IMAGES_PATH = "../" + IMAGES_PATH
 
 block content
   h1 Pug - node template engine
@@ -33,4 +34,4 @@ block content
       strong focus on performance and powerful features.2
     #youtube
 
-    img(src = IMAGES_PATH + "/test/test.jpg")
+    img(src = IMAGES_PATH + "test/test.jpg")

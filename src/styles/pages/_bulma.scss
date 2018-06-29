@@ -1,0 +1,38 @@
+@charset 'UTF-8';
+
+$page_class: page-bulma;
+$imgPath: $IMAGES_PATH;
+
+.#{$page_class}
+{
+    font-size: 1.5rem;
+
+    color: #fff;
+    background: url($imgPath + 'testn.jpg' ) ;
+
+    @include mobile
+    {
+        color: rgba(aquamarine,.1);
+    }
+    @include tablet
+    {
+        color: rgba(aquamarine,.4);
+    }
+    @include desktop
+    {
+        color: rgba(aquamarine,.5);
+    }
+    @include widescreen
+    {
+        color: rgba(aquamarine,.8);
+    }
+    @include fullhd
+    {
+        color: rgba(aquamarine,1.0);
+    };
+
+    h1
+    {
+        color: aquamarine;
+    }
+}

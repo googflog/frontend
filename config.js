@@ -18,28 +18,28 @@ GA_ID = "UA-111111111111-1";
 LANG = "ja";
 
 // FilePath
-IMAGES_PATH = "../images/";
-JS_PATH = "./js/";
-CSS_PATH = "./css/"
+IMAGES_PATH = "/assets/images/";
+JS_PATH = "/assets/scripts/";
+CSS_PATH = "/assets/styles/"
 
 // Pug Options
 PUG_PRETTY = true
 
 // WebPack JS
 WEBPACK_ENTRY = {
-  "js/app": "./src/js/main.js",
-  "contact/contact": "./src/js/pages/contact.js"
+  "assets/scripts/app": "./src/scripts/main.js",
+  "contact/contact": "./src/scripts/pages/contact.js"
 }
 
 // Source
 SRC_IMAGES = './src/images/';
-SRC_JS = './src/js/';
-SRC_SCSS = './src/sass/';
-SRC_PUG = './src/pug/';
+SRC_JS = './src/scripts/';
+SRC_SCSS = './src/styles/';
+SRC_PUG = './src/templates/';
 
 // Dist
-DIST_IMAGES = './images/';
-DIST_CSS = './css/';
+DIST_IMAGES = './assets/images/';
+DIST_CSS = './assets/styles/';
 DIST_HTML = './';
 
 // JS,CSS キャッシュ防止

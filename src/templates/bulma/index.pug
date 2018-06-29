@@ -1,0 +1,55 @@
+extends ../_base/_layout
+
+append vars
+  -
+    page.id = 'bulma'
+
+    page.title = 'BULMA test'
+    page.description = ''
+    page.keywords = ''
+
+    page.ogpUrl = ''
+    page.ogpTitle = ''
+    page.ogpDescription = ''
+    page.ogpImage = ''
+    page.ogpSiteName = ''
+    page.ogpType = ''
+    page.ogpLocale = ''
+    page.ogpAppID = ''
+
+    // page.styles = [CSS_PATH + 'top.css']
+    // page.scripts = [JS_PATH + 'top.js']
+
+  - IMAGES_PATH = IMAGES_PATH
+
+block content
+  .hero.is-primary
+    .hero-body
+      .container
+        h1.title BULMA test
+        h2.subtitle subtitle
+  .columns
+    .column
+      p bulma column
+      img(src = IMAGES_PATH + "test/test.jpg")
+    .column
+      p bulma column
+      img(src = IMAGES_PATH + "test/test.jpg")
+  .columns.is-3
+    .column
+      a.button.is-large.is-primary(href="https://bulma.io/documentation/modifiers/") Modifiers
+    .column
+      a.button.is-large.is-primary(href="https://bulma.io/documentation/columns/") Columns
+    .column
+      a.button.is-large(href="http://bit.ly/2Mzhj7L") CSSフレームワーク BULMA チュートリアル①
+    .column
+      a.button.is-large(href="https://saruwakakun.com/html-css/basic/font-awesome") Font Awesomeの使い方
+
+  .columns.is-desktop
+    .column 1
+    .column 2
+    .column 3
+    .column 4
+  .columns
+    .field
+      a.button.is-large.is-primary(href="/") TOPへ
