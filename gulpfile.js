@@ -53,6 +53,7 @@ gulp.task("default", () => {
 
 // Watchs
 gulp.task('watchs', function() {
+  // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
   gulp.watch(SRC_SCSS + '**/*.scss', ['sass']);
   gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
   gulp.watch([SRC_IMAGES + '**/*'], ['images']);
