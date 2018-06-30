@@ -25,6 +25,7 @@
     "minimist": "^1.2.0",
     "run-sequence": "^2.2.1",
     "webpack": "^4.13.0",
+    "webpack-build-notifier": "^0.1.27",
     "webpack-cli": "^3.0.8",
     "webpack-stream": "^4.0.3"
   },

@@ -2,6 +2,7 @@
 let gulp = require("gulp");
 let webpackStream = require("webpack-stream");
 let webpack = require("webpack");
+let WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
 let pug = require('gulp-pug');
 let plumber = require("gulp-plumber");
@@ -52,7 +53,6 @@ gulp.task("default", () => {
 
 // Watchs
 gulp.task('watchs', function() {
-  gulp.watch(SRC_JS + "**/*.js", ['js']);
   gulp.watch(SRC_SCSS + '**/*.scss', ['sass']);
   gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
   gulp.watch([SRC_IMAGES + '**/*'], ['images']);
@@ -78,6 +78,7 @@ gulp.task("js", () => {
     MODE = "production";
   }
   var webpackOption = {
+    watch: true,
     mode: MODE,
     entry: WEBPACK_ENTRY,
     output: {
@@ -97,9 +98,17 @@ gulp.task("js", () => {
           }
         }]
       }]
-    }
+    },
+    plugins: [
+      new WebpackBuildNotifierPlugin({
+        title: "My Project Webpack Build",
+        // logo: path.resolve("./img/favicon.png"),
+        suppressSuccess: 'true'
+      })]
   }
-  webpackStream(webpackOption, webpack)
+  gulp.src('')
+    .pipe(webpackStream(webpackOption, webpack))
+    .pipe(plumber())
     .pipe(gulp.dest(DIST));
 });
 
@@ -195,6 +204,7 @@ gulp.task('reload', () => {
   }
 });
 
+// http://bit.ly/2lKAcJs
 // http://bit.ly/2ItoUlN
 // http://bit.ly/2KsBCDk
 // http://bit.ly/2MxrkCD

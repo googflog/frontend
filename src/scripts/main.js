@@ -22,7 +22,7 @@ $(".playbtn").on("click", function(e) {
 })
 let a="A";
 console.log(a);
-let aaa = (ee) =>{
-  console.log(ee);
+let aaa = (ee2) =>{
+  console.log(ee2);
 }
 aaa("C")
