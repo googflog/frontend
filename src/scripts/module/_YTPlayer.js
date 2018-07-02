@@ -16,13 +16,15 @@ class YTPlayer extends EventEmitter {
    * @param {number} width 動画の幅
    * @param {number} height 動画の高さ
    * @param {Object} options プレーヤーのカスタマイズに使うパラメータ（https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja）
+   * @param {function} readyCallBack プレイヤーの準備が整った際に呼ばれる関数
    */
-  constructor(elm, videoID, width, height, options) {
+  constructor(elm, videoID, width, height, options, readyCallBack) {
     super();
 
     var width  = width  || '640';
     var height = height || '390';
     var options = options || {};
+    this.readyCallBack = readyCallBack || function(){/*console.log('Ready')*/};
 
     YTPlayer.loadAPI(() => {
       this.player = new YT.Player(elm, {
@@ -75,6 +77,7 @@ class YTPlayer extends EventEmitter {
    * @private
    */
   _onPlayerReady() {
+    this.readyCallBack();
     this.emit('ready');
   }
 
