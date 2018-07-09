@@ -1,5 +1,8 @@
 //アセットルート、テンプレートルートですトスr−と
 
+DIST_SITE_URL = "http://example.com/dev";
+STAGE_SITE_URL = "http://example.com/stage";
+
 // META
 SITE_NAME = "サイトタイトル";
 SITE_URL = "http://example.com";
@@ -8,7 +11,7 @@ SITE_KEYWORDS = "キーワード,キーワード,キーワード";
 SITE_OGP_URL = "http://example.com/";
 SITE_OGP_TITLE = "サイトタイトル";
 SITE_OGP_DESCRIPTION = "ディスプリプション";
-SITE_OGP_IMAGE = "http://example.com/ogp.jpg";
+SITE_OGP_IMAGE = "ogp.jpg";
 SITE_OGP_SITE_NAME = "サイトタイトル";
 SITE_OGP_TYPE = "article";
 SITE_OGP_LOCALE = "ja_JP";
