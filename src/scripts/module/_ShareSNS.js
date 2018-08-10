@@ -1,3 +1,4 @@
+import $ from "jquery";
 /**
  * snsシェアを行う（各シェア用のwindowを開く）
  */

@@ -20,12 +20,22 @@ GA_ID = "UA-111111111111-1";
 
 LANG = "ja";
 
-// FilePath
-IMAGES_PATH = "/assets/images/";
-JS_PATH = "/assets/scripts/";
-CSS_PATH = "/assets/styles/"
 
-// Pug Options
+// 書き出しファイル内パス FilePath
+IMAGES_PATH = "/assets/images/";
+IMAGES_PATH_STAG = IMAGES_PATH;
+IMAGES_PATH_PROD = IMAGES_PATH;
+
+JS_PATH = "/assets/scripts/";
+JS_PATH_STAG = JS_PATH;
+JS_PATH_PROD = JS_PATH;
+
+CSS_PATH = "/assets/styles/";
+CSS_PATH_STAG = CSS_PATH;
+CSS_PATH_PROD = CSS_PATH;
+
+
+// Pug Options HTML圧縮
 PUG_PRETTY = true
 
 // WebPack JS
@@ -34,13 +44,13 @@ WEBPACK_ENTRY = {
   "contact/contact": "./src/scripts/pages/contact.js"
 }
 
-// Source
+// 監視 Source
 SRC_IMAGES = './src/images/';
 SRC_JS = './src/scripts/';
 SRC_SCSS = './src/styles/';
 SRC_PUG = './src/templates/';
 
-// Dist
+// 書出し Dist
 DIST_IMAGES = './assets/images/';
 DIST_CSS = './assets/styles/';
 DIST_HTML = './';

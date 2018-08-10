@@ -33,9 +33,23 @@ block content
         p.test1 Pug is a terse and <strong>simple</strong> templating language with
       .column
         p.test2 Pug is a terse and <strong>simple</strong> templating language with
+    if TARGETTYPE == 'development'
+      p development
+    if TARGETTYPE == 'stage'
+      p stage
+    if TARGETTYPE == 'production'
+      p production
     #youtube
     .columns
       .column
-        a.button.is-large(href="bulma") BlumaTest
+        a.button.is-large.js-shareSNS-facebook(href="#" data-url="https://www.yahoo.co.jp/") Facebook
+      .column
+        a.button.is-large.js-shareSNS-google(href="#" data-url="https://www.yahoo.co.jp/") Google＋
+      .column
+        a.button.is-large.js-shareSNS-twitter(href="#" data-url="https://www.yahoo.co.jp/" data-text="シェア文言１" data-hash="ハッシュ１") Twitter１
+      .column
+        a.button.is-large.js-tw(href="#" data-url="https://www.yahoo.co.jp/" data-text="シェア文言２" data-hash="ハッシュ２") Twitter２
+      .column
+        a.button.is-large(href="bulma").js-shareSNS-twitter BlumaTest
       .column
         a.button.is-large(href="contact") CONTACT

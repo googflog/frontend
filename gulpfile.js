@@ -122,12 +122,27 @@ gulp.task('sass', function() {
         errorHandler: notify.onError("Error: <%= error.message %>")
       }))
       .pipe(sassVariables({
-        $IMAGES_PATH: IMAGES_PATH
+        $IMAGES_PATH: IMAGES_PATH_PROD
       }))
       .pipe(sass({
         outputStyle: 'compressed'
       }))
       .pipe(autoprefixer())
+      .pipe(gulp.dest(DIST + DIST_CSS))
+  } else if (targettype == "stage") {
+    return gulp.src(SRC_SCSS + '**/*.scss')
+      .pipe(plumber({
+        errorHandler: notify.onError("Error: <%= error.message %>")
+      }))
+      .pipe(sourcemaps.init())
+      .pipe(sassVariables({
+        $IMAGES_PATH: IMAGES_PATH_STAG
+      }))
+      .pipe(sass({
+        outputStyle: 'expanded'
+      }))
+      .pipe(autoprefixer())
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest(DIST + DIST_CSS))
   } else {
     return gulp.src(SRC_SCSS + '**/*.scss')
@@ -158,6 +173,26 @@ gulp.task('pug', () => {
     .pipe(gulp.dest(DIST + DIST_HTML));
 });
 
+jsPathSet =()=>{
+  if(targettype == "stage"){
+    return JS_PATH_STAG;
+  }else if(targettype == "production"){
+    return JS_PATH_PROD;
+  }else {
+    return JS_PATH;
+  }
+}
+
+cssPathSet =()=>{
+  if(targettype == "stage"){
+    return CSS_PATH_STAG;
+  }else if(targettype == "production"){
+    return CSS_PATH_PROD;
+  }else {
+    return CSS_PATH;
+  }
+}
+
 const pugOptions = {
   pretty: PUG_PRETTY,
   locals: {
@@ -178,10 +213,14 @@ const pugOptions = {
     LANG: LANG,
 
     IMAGES_PATH: IMAGES_PATH,
-    JS_PATH: JS_PATH,
-    CSS_PATH: CSS_PATH,
+
+    JS_PATH: jsPathSet(),
+    CSS_PATH: cssPathSet(),
+
+    TARGETTYPE:targettype
   }
 }
+
 
 
 //Browser Sync
