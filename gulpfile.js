@@ -231,7 +231,7 @@ gulp.task('browser-sync', () => {
     },
     reloadThrottle: 1800
   });
-  gulp.watch(DIST + "**/*", ['reload']);
+  gulp.watch(DIST + "**/*", ['images','reload']);
 });
 gulp.task('reload', () => {
   browserSync.reload();
