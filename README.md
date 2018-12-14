@@ -12,7 +12,7 @@
 
 ## 公開版
 
-`npm run release`
+`npm run production`
 
 ### メモ
 TODO: 変更しないJSに変更があった場合反映されない
