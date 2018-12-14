@@ -28,15 +28,15 @@ let targettype = argv.env;
 let DIST = '';
 if (targettype == "stage") {
   DIST = './stage/';
-  console.log("🥟", targettype, "🥟");
+  console.log("🐥", targettype, "🐥");
 
 } else if (targettype == "production") {
   DIST = './prod/';
-  console.log("🍜", targettype, "🍜");
+  console.log("🐓", targettype, "🐓");
 
 } else {
   DIST = './dist/';
-  console.log("🍥", targettype, "🍥");
+  console.log("🥚", targettype, "🥚");
 
 }
 
@@ -197,13 +197,13 @@ const pugOptions = {
   pretty: PUG_PRETTY,
   locals: {
     SITE_NAME: SITE_NAME,
-    SITE_URL: targettype == "prod" ? SITE_URL : targettype == "stage" ? STAGE_SITE_URL : DIST_SITE_URL,
+    SITE_URL: targettype == "prod" ? SITE_OGP_URL : targettype == "stage" ? STAGE_SITE_URL : DIST_SITE_URL,
     SITE_DESCRIPTION: SITE_DESCRIPTION,
     SITE_KEYWORDS: SITE_KEYWORDS,
     SITE_OGP_URL: targettype == "prod" ? SITE_OGP_URL : targettype == "stage" ? STAGE_SITE_URL : DIST_SITE_URL,
     SITE_OGP_TITLE: SITE_OGP_TITLE,
     SITE_OGP_DESCRIPTION: SITE_OGP_DESCRIPTION,
-    SITE_OGP_IMAGE: (targettype == "prod" ? SITE_URL : targettype == "stage" ? STAGE_SITE_URL : DIST_SITE_URL) + SITE_OGP_IMAGE,
+    SITE_OGP_IMAGE: (targettype == "prod" ? SITE_OGP_URL : targettype == "stage" ? STAGE_SITE_URL : DIST_SITE_URL) + SITE_OGP_IMAGE,
     SITE_OGP_SITE_NAME: SITE_OGP_SITE_NAME,
     SITE_OGP_TYPE: SITE_OGP_TYPE,
     SITE_OGP_LOCALE: SITE_OGP_LOCALE,
@@ -236,9 +236,9 @@ gulp.task('browser-sync', () => {
 gulp.task('reload', () => {
   browserSync.reload();
   if (targettype == "stage") {
-    console.log("🥟 🥟 🥟");
+    console.log("🐥 🐥 🐥");
   } else if (targettype == "production") {
-    console.log("🍜 🍜 🍜");
+    console.log("🐓 🐓 🐓");
   } else {
     console.log("🍥 🍥 🍥");
   }

@@ -6,7 +6,7 @@
     "start": "gulp --env development",
     "dev": "gulp --env development",
     "stage": "gulp --env stage",
-    "release": "gulp --env production"
+    "production": "gulp --env production"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

@@ -1,0 +1,279 @@
+/**
+ * Mixin
+ */
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+@mixin hideaway {
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+.u-sp{
+  @media screen and (min-width: 768px){
+    display: none;
+  }
+}
+.u-pc{
+  @media screen and (max-width: 768px - 1){
+    display: none;
+  }
+}
+
+
+// PC, TABLET
+@mixin mq-pc {
+     @media screen and (min-width: 768px){
+        @content;
+    }
+}
+// SMART PHONE
+@mixin mq-sp {
+     @media screen and (max-width: 768px - 1){
+        @content;
+    }
+}
+// landscape
+@mixin mq-landscape {
+     @media screen and (orientation: landscape){
+        @content;
+    }
+}
+@mixin bgImgSet() {
+    overflow: hidden;
+    text-indent: -999em;
+}
+@function halfSizeImg($value) {
+     @return ($value/2)+px;
+}
+@function halfSizeImgPar($value) {
+     @return ($value/2)+%;
+}
+@function SpWidth640($value) {
+     @return (100/640)*$value+%;
+}
+@function SpWidth540($value) {
+     @return (100/540)*$value+%;
+}
+@function SpWidth590($value) {
+     @return (100/590)*$value+%;
+}
+@function SpWidth750($value) {
+     @return (100/750)*$value+%;
+}
+@function SpWidth($valueBase,$value) {
+     @return (100/$valueBase)*$value+%;
+}
+//
+@mixin imgSet($w,$h,$path,$top:null,$left:null,$right:null,$bottom:null) {
+    width: halfSizeImg($w);
+    height: halfSizeImg($h);
+    background: url($path) no-repeat;
+    background-size: contain;
+    text-indent: -999em;
+    @if $top !=null {
+        top: halfSizeImg($top);
+    }
+    @if $left!=null {
+        left: halfSizeImg($left);
+    }
+    @if $right!=null {
+        right: halfSizeImg($right);
+    }
+    @if $bottom!=null {
+        bottom: halfSizeImg($bottom);
+    }
+    @if $top != null or $left != null or $right != null or $bottom != null {
+        position: absolute;
+    }
+}
+//
+@mixin imgSetSet($w,$h,$base,$path:null,$position:null,$top:null,$left:null,$bottom:null,$right:null) {
+    width: percentage(($w / $base));
+    height: 0;
+    @if $h != null {
+        padding-bottom: percentage(($h / $base));
+    }
+    @if $path != null {
+        background: url($path) center center no-repeat;
+    }
+    background-size: contain;
+    text-indent: -999em;
+    @if $top!=null {
+        top: 0;
+        margin-top: percentage(($top / $base));
+    }
+    @if $left!=null {
+        left: percentage(($left / $base));
+    }
+    @if $right!=null {
+        right: percentage(($right / $base));
+    }
+    @if $bottom!=null {
+        margin-bottom: percentage(($bottom / $base));
+    }
+
+    @if $position == "absolute" or $position == "relative" {
+        position: $position;
+    }
+}
+@mixin imgSetSp($w,$h,$path,$top:null,$left:null,$right:null,$bottom:null,$parentW:750) {
+    width: (100/$parentW)*$w+%;
+    height: 0;
+    padding-bottom: (100/$parentW)*$h+%;
+    background: url($path) center center no-repeat;
+    background-size: contain;
+    text-indent: -999em;
+    @if $top !=null {
+        top: (100/$parentW)*$top+%;
+    }
+    @if $left!=null {
+        left: (100/$parentW)*$left+%;
+    }
+    @if $right!=null {
+        right: (100/$parentW)*$right+%;
+    }
+    @if $bottom!=null {
+        bottom: (100/$parentW)*$bottom+%;
+    }
+    @if $top != null or $left != null or $right != null or $bottom != null {
+        position: absolute;
+    }
+}
+
+
+
+@mixin for-size($range) {
+  $phone-upper-boundary: constants('phoneUpperBoundary') + px;
+  $tablet-portrait-upper-boundary: constants('tabletPortraitUpperBoundary') + px;
+  $tablet-landscape-upper-boundary: constants('tabletLandscapeUpperBoundary') + px;
+  $desktop-upper-boundary: constants('desktopUpperBoundary') + px;
+ 
+  @if $range == phone-only {
+    @media (max-width: #{$phone-upper-boundary - 1}) {
+      //このサイズより小さい場合
+      @content;
+    }
+  } @else if $range == tablet-portrait-up {
+    @media (min-width: $phone-upper-boundary) {
+      //このサイズより大きい場合に適用
+      @content;
+    }
+  } @else if $range == tablet-landscape-up {
+    @media (min-width: $tablet-portrait-upper-boundary) {
+      //このサイズより大きい場合に適用
+      @content;
+    }
+  } @else if $range == desktop-up {
+    @media (min-width: $tablet-landscape-upper-boundary) {
+      //このサイズより大きい場合に適用
+      @content;
+    }
+  } @else if $range == big-desktop-up {
+    @media (min-width: $desktop-upper-boundary) {
+      //このサイズより大きい場合に適用
+      @content;
+    }
+  } @else if $range == desktop-down {
+    @media (max-width: $tablet-landscape-upper-boundary) {
+      //このサイズより小さい場合
+      @content;
+    }
+  } @else if $range == tablet-landscape-down {
+    @media (max-width: $tablet-portrait-upper-boundary) {
+      //このサイズより小さい場合
+      @content;
+    }
+  } @else if $range == tablet-portrait-down {
+    @media (max-width: $phone-upper-boundary) {
+      //このサイズより小さい場合
+      @content;
+    }
+  }
+}
+
+
+@mixin arrow {
+  &:after{
+  	content:"";
+  	position: absolute;
+  	top: 4px;
+  	bottom: 0;
+    right: 13px;
+  	margin:auto;
+  	width: 10px;
+  	height: 0px;
+  	border-bottom: solid 1px #fff;
+    transform-origin: center right;
+  	transform: rotate(40deg);
+  }
+  &:before{
+  	content:"";
+  	position: absolute;
+  	top: 3px;
+  	bottom: 0;
+    right:13px;
+  	margin:auto;
+  	width: 20px;
+  	height: 0px;
+  	border-bottom: solid 1px #fff;
+  }
+  @include for-size(phone-only) {
+    &:after{
+      top: 3px;
+      right: 9px;
+      width: 9px;
+    }
+    &:before{
+      top: 3px;
+      right:9px;
+      width: 15px;
+    }
+  }
+}
+
+@mixin arrow2($val) {
+  &:after{
+  	content:"";
+  	position: absolute;
+  	top: 4px;
+  	bottom: 0;
+    right: 13px;
+  	margin:auto;
+  	width: 10px;
+  	height: 0px;
+  	border-bottom: solid 1px #fff;
+    transform-origin: center right;
+  	transform: rotate(40deg);
+  }
+  &:before{
+  	content:"";
+  	position: absolute;
+  	top: 3px;
+  	bottom: 0;
+    right:13px;
+  	margin:auto;
+  	width: 20px;
+  	height: 0px;
+  	border-bottom: solid 1px #fff;
+  }
+  @media (max-width: $val ) {
+    &:after{
+      top: 3px;
+      right: auto;
+      left: 58px;
+      width: 9px;
+    }
+    &:before{
+      top: 3px;
+      right:auto;
+      left: 52px;
+      width: 15px;
+    }
+  }
+}

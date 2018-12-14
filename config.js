@@ -5,10 +5,10 @@ STAGE_SITE_URL = "http://example.com/stage";
 
 // META
 SITE_NAME = "サイトタイトル";
-SITE_URL = "http://example.com";
+SITE_URL = "http://example.com/production";
 SITE_DESCRIPTION = "ディスプリプション";
 SITE_KEYWORDS = "キーワード,キーワード,キーワード";
-SITE_OGP_URL = "http://example.com/";
+SITE_OGP_URL = "http://example.com/production";
 SITE_OGP_TITLE = "サイトタイトル";
 SITE_OGP_DESCRIPTION = "ディスプリプション";
 SITE_OGP_IMAGE = "ogp.jpg";
