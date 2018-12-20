@@ -1,6 +1,24 @@
 /**
  * Mixin
  */
+
+// vwサイズを返す
+@function get_vw($size, $viewport:750){
+  $rate: 100 / $viewport;
+  @return $rate * $size * 1vw;
+}
+
+@mixin fz_vw($font_size:10){
+  font-size: $font_size * 1px;
+  font-size: get_vw($font_size);
+}
+
+//フォントサイズに対してのラインハイトの比率を出す
+@mixin lh_em($size, $lineheight){
+  line-height: $lineheight / $size + 0em;
+}
+
+
 @mixin clearfix {
     &:after {
         content: "";
