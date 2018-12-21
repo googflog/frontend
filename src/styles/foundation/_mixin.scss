@@ -14,6 +14,28 @@
 @mixin lh_em($size, $lineheight) {
   line-height: $lineheight / $size + 0em;
 }
+
+//背景に画像を指定
+@mixin bgImg($path,$w,$h,$base) {
+  @if($path!='none') {
+    background: url($path) no-repeat;
+    background-size: contain;
+  }
+  display: block;
+  height: 0;
+  max-width: $w + 0px;
+  width: percentage($w/$base);
+  padding-bottom: percentage($h/$base);
+  margin: 0;
+  overflow: hidden;
+  text-indent: -999em;
+  @media screen and (min-width: 1280px) {
+    padding: 0;
+    height: $h + 0px;
+  }
+}
+
+//クリアフィックス
 @mixin clearfix {
   &:after {
     content: "";
