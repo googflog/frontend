@@ -1,5 +1,7 @@
 ## 開発
 
+`npm install`
+
 <!-- `gulp dev-pc` -->
 <!-- `gulp dev-sp` -->
 `npm run dev`
