@@ -18,13 +18,14 @@ class YTPlayer extends EventEmitter {
    * @param {Object} options プレーヤーのカスタマイズに使うパラメータ（https://developers.google.com/youtube/player_parameters?playerVersion=HTML5&hl=ja）
    * @param {function} readyCallBack プレイヤーの準備が整った際に呼ばれる関数
    */
-  constructor(elm, videoID, width, height, options, readyCallBack) {
+  constructor(elm, videoID, width, height, options, readyCallBack, stateChange) {
     super();
 
     var width  = width  || '640';
     var height = height || '390';
     var options = options || {};
     this.readyCallBack = readyCallBack || function(){/*console.log('Ready')*/};
+    this.stateChange = stateChange || function(){/*console.log('Ready')*/};
 
     YTPlayer.loadAPI(() => {
       this.player = new YT.Player(elm, {
@@ -88,19 +89,22 @@ class YTPlayer extends EventEmitter {
    * @callback
    * @private
    */
-  _onPlayerStateChange(state) {
-    switch (state.data) {
-      case 0:
-        this.emit('end');
-        break;
-      case 1:
-        this.emit('play');
-        break;
-      case 2:
-        this.emit('pause');
-        break;
-    }
-  }
+   _onPlayerStateChange(state) {
+     switch (state.data) {
+       case 0:
+         this.stateChange('end');
+         this.emit('end');
+         break;
+       case 1:
+         this.stateChange('play');
+         this.emit('play');
+         break;
+       case 2:
+         this.stateChange('pause');
+         this.emit('pause');
+         break;
+     }
+   }
 
   /**
    * 動画を再生
