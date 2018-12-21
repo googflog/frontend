@@ -44,19 +44,21 @@ if (targettype == "stage") {
 // Default
 gulp.task("default", () => {
   if (targettype == "development") {
-    runSequence('pug', 'images', 'sass', 'js', 'watchs', 'browser-sync');
+    runSequence('pug', 'images', 'sass', 'js', 'watch', 'browser-sync');
   } else {
-    runSequence('clean', 'pug', 'images', 'sass', 'js', 'watchs', 'browser-sync');
+    runSequence('clean', 'pug', 'images', 'sass', 'js', 'watch', 'browser-sync');
   }
 });
 
 
 // Watchs
-gulp.task('watchs', function() {
+gulp.task('watch', function() {
   // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
   gulp.watch(SRC_SCSS + '**/*.scss', ['sass']);
   gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
   gulp.watch([SRC_IMAGES + '**/*'], ['images']);
+
+  gulp.watch("src/**/*", ['browserSyncSuppressOverReload']);
 });
 
 
@@ -105,7 +107,8 @@ gulp.task("js", () => {
         title: "My Project Webpack Build",
         // logo: path.resolve("./img/favicon.png"),
         suppressSuccess: 'true'
-      })]
+      })
+    ]
   }
   gulp.src('')
     .pipe(webpackStream(webpackOption, webpack))
@@ -173,22 +176,22 @@ gulp.task('pug', () => {
     .pipe(gulp.dest(DIST + DIST_HTML));
 });
 
-jsPathSet =()=>{
-  if(targettype == "stage"){
+jsPathSet = () => {
+  if (targettype == "stage") {
     return JS_PATH_STAG;
-  }else if(targettype == "production"){
+  } else if (targettype == "production") {
     return JS_PATH_PROD;
-  }else {
+  } else {
     return JS_PATH;
   }
 }
 
-cssPathSet =()=>{
-  if(targettype == "stage"){
+cssPathSet = () => {
+  if (targettype == "stage") {
     return CSS_PATH_STAG;
-  }else if(targettype == "production"){
+  } else if (targettype == "production") {
     return CSS_PATH_PROD;
-  }else {
+  } else {
     return CSS_PATH;
   }
 }
@@ -217,7 +220,7 @@ const pugOptions = {
     JS_PATH: jsPathSet(),
     CSS_PATH: cssPathSet(),
 
-    TARGETTYPE:targettype
+    TARGETTYPE: targettype
   }
 }
 
@@ -231,17 +234,21 @@ gulp.task('browser-sync', () => {
     },
     reloadThrottle: 1800
   });
-  gulp.watch(DIST + "**/*", ['images','reload']);
 });
-gulp.task('reload', () => {
-  browserSync.reload();
-  if (targettype == "stage") {
-    console.log("🐥 🐥 🐥");
-  } else if (targettype == "production") {
-    console.log("🐓 🐓 🐓");
-  } else {
-    console.log("🍥 🍥 🍥");
-  }
+
+var timeoutidBs;
+gulp.task('browserSyncSuppressOverReload', () => {
+  clearTimeout(timeoutidBs);
+  timeoutidBs = setTimeout(function() {
+    browserSync.reload();
+    if (targettype == "stage") {
+      console.log("🐥 🐥 🐥");
+    } else if (targettype == "production") {
+      console.log("🐓 🐓 🐓");
+    } else {
+      console.log("🥚 🥚 🥚");
+    }
+  }, 500);
 });
 
 // http://bit.ly/2lKAcJs
