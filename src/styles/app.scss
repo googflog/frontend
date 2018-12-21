@@ -5,8 +5,9 @@
 // -----------------------
 
 // @import './base/normalize';
-// @import './base/reset';
+@import './base/reset';
 // @import './base/reboot';
+@import './foundation/mixin';
 
 // -----------------------
 // Libs
@@ -17,11 +18,11 @@
 // @import 'node_modules/slick-carousel/slick/slick';
 // @import 'node_modules/slick-carousel/slick/slick-theme';
 
-@import 'node_modules/bulma/sass/base/minireset';
-@import 'node_modules/bulma/sass/utilities/_all';
-@import 'node_modules/bulma/sass/grid/columns';
-@import 'node_modules/bulma/sass/elements/button';
-@import 'node_modules/bulma/sass/layout/_all';
+// @import 'node_modules/bulma/sass/base/minireset';
+// @import 'node_modules/bulma/sass/utilities/_all';
+// @import 'node_modules/bulma/sass/grid/columns';
+// @import 'node_modules/bulma/sass/elements/button';
+// @import 'node_modules/bulma/sass/layout/_all';
 
 // -----------------------
 // Page
@@ -29,7 +30,7 @@
 
 @import "./pages/top";
 @import "./pages/contact";
-@import "./pages/bulma";
+// @import "./pages/bulma";
 
 // -----------------------
 // Default
@@ -37,9 +38,9 @@
 
 html
 {
-  font-size: 62.5%; /* -> 10px; */
+  // font-size: 62.5%; /* -> 10px; */
 }
 *::selection
 {
-  background: yellow;
+  // background: yellow;
 }
