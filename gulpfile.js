@@ -258,15 +258,16 @@ gulp.task('browserSyncSuppressOverReload', () => {
   timeoutidBs = setTimeout(function() {
     browserSync.reload();
     if (targettype == "stage") {
-      console.log("🐥 🐥 🐥");
+      console.log("🐥 " + targettype + " 🐥");
     } else if (targettype == "production") {
-      console.log("🐓 🐓 🐓");
+      console.log("🐓 " + targettype + " 🐓");
     } else {
-      console.log("🥚 🥚 🥚");
+      console.log("🥚 " + targettype + " 🥚");
     }
   }, 500);
 });
 
+// http://bit.ly/2DgGXLI
 // http://bit.ly/2lKAcJs
 // http://bit.ly/2ItoUlN
 // http://bit.ly/2KsBCDk
