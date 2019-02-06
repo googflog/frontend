@@ -41,11 +41,6 @@ if (targettype == "stage") {
 
 }
 
-
-
-// Default
-// gulp.task("default", gulp.series('sass'));
-
 function task1(done) {
   console.log('task 1');
   setTimeout(function() {
@@ -70,26 +65,6 @@ gulp.task('two', function(done) {
   // do stuff
   done();
 });
-
-// Default
-// gulp.task('default', gulp.series(
-//   gulp.parallel(task1, task2),
-//   task3,
-//   function(done) {
-//     console.log('default');
-//     done();
-//   }
-// ));
-
-
-
-// gulp.task("default", () => {
-// if (targettype == "development") {
-//   runSequence('pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
-// } else {
-//   runSequence('clean', 'pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
-// }
-// });
 
 
 gulp.task('images', (done) => {
@@ -300,9 +275,6 @@ const browserSyncSuppressOverReload = () => {
 gulp.task('watch', (done) => {
 
   // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
-  // watch(SRC_SCSS + '**/*.scss', () => {
-  //   gulp.series('sass');
-  // });
 
   gulp.watch(SRC_SCSS + '**/*.scss', gulp.task('sass'));
 
