@@ -68,7 +68,9 @@ gulp.task('watch', function() {
   watch(SRC_COPYFILE + '**/*', function() {
     gulp.start('copy');
   });
-  gulp.watch(SRC + "**/*", ['browserSyncSuppressOverReload']);
+  watch(SRC + "**/*", function() {
+    gulp.start('browserSyncSuppressOverReload');
+  });
 });
 
 
