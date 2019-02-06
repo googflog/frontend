@@ -24,7 +24,7 @@ let config = require("./config");
 
 let argv = minimist(process.argv.slice(2));
 let targettype = argv.env;
-
+//
 
 let DIST = '';
 if (targettype == "stage") {
@@ -42,58 +42,84 @@ if (targettype == "stage") {
 }
 
 
+
 // Default
-gulp.task("default", () => {
-  if (targettype == "development") {
-    runSequence('pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
-  } else {
-    runSequence('clean', 'pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
-  }
+// gulp.task("default", gulp.series('sass'));
+
+function task1(done) {
+  console.log('task 1');
+  setTimeout(function() {
+    console.log('task 1 >> 1100ms');
+    done();
+  }, 1100);
+}
+
+function task2(done) {
+  console.log('task 2');
+  setTimeout(function() {
+    console.log('task 2 >> 1000ms');
+    done();
+  }, 1000);
+}
+
+function task3(done) {
+  console.log('task 3');
+  done();
+}
+gulp.task('two', function(done) {
+  // do stuff
+  done();
 });
 
-
-// Watchs
-gulp.task('watch', function() {
-  // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
-  watch(SRC_SCSS + '**/*.scss', function() {
-    gulp.start('sass');
-  });
-  watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], function() {
-    gulp.start('pug');
-  });
-  // gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
-  watch(SRC_IMAGES + '**/*', function() {
-    gulp.start('images');
-  });
-  watch(SRC_COPYFILE + '**/*', function() {
-    gulp.start('copy');
-  });
-  watch(SRC + "**/*", function() {
-    gulp.start('browserSyncSuppressOverReload');
-  });
-});
+// Default
+// gulp.task('default', gulp.series(
+//   gulp.parallel(task1, task2),
+//   task3,
+//   function(done) {
+//     console.log('default');
+//     done();
+//   }
+// ));
 
 
-gulp.task('images', function() {
+
+// gulp.task("default", () => {
+// if (targettype == "development") {
+//   runSequence('pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
+// } else {
+//   runSequence('clean', 'pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
+// }
+// });
+
+
+gulp.task('images', (done) => {
   gulp.src(SRC_IMAGES + '**/*')
     .pipe(gulp.dest(DIST + DIST_IMAGES));
+  done();
 });
 
 
 // Copy
-gulp.task('copy', function() {
+gulp.task('copy', (done) => {
   gulp.src('./src/copy/**/*')
     .pipe(gulp.dest(DIST + DIST_COPYFILE));
+  done();
 });
 
 // Clean
-gulp.task('clean', function(cb) {
-  return del(DIST + '*', cb);
+gulp.task('clean', (cb) => {
+  // return del(DIST + '*', cb);
+  if (targettype != "development") {
+    return del(DIST + '*', cb);
+  } else {
+    cb();
+    return true;
+  }
 });
 
 
 // Js
-gulp.task("js", () => {
+gulp.task("js", (done) => {
   var MODE = "development";
   if (targettype == "production") {
     MODE = "production";
@@ -128,15 +154,18 @@ gulp.task("js", () => {
       })
     ]
   }
-  gulp.src('')
+  gulp.src(SRC_JS)
     .pipe(webpackStream(webpackOption, webpack))
     .pipe(plumber())
     .pipe(gulp.dest(DIST));
+
+  done();
+  return true;
 });
 
 
 // Sass
-gulp.task('sass', function() {
+gulp.task('sass', () => {
   if (targettype == "production") {
     return gulp.src(SRC_SCSS + '**/*.scss')
       .pipe(plumber({
@@ -242,8 +271,6 @@ const pugOptions = {
   }
 }
 
-
-
 //Browser Sync
 gulp.task('browser-sync', () => {
   browserSync({
@@ -255,7 +282,7 @@ gulp.task('browser-sync', () => {
 });
 
 var timeoutidBs;
-gulp.task('browserSyncSuppressOverReload', () => {
+const browserSyncSuppressOverReload = () => {
   clearTimeout(timeoutidBs);
   timeoutidBs = setTimeout(function() {
     browserSync.reload();
@@ -267,7 +294,36 @@ gulp.task('browserSyncSuppressOverReload', () => {
       console.log("🥚 " + targettype + " 🥚");
     }
   }, 500);
+};
+
+// Watchs
+gulp.task('watch', (done) => {
+
+  // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
+  // watch(SRC_SCSS + '**/*.scss', () => {
+  //   gulp.series('sass');
+  // });
+
+  gulp.watch(SRC_SCSS + '**/*.scss', gulp.task('sass'));
+
+  gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], gulp.task('pug'));
+
+  gulp.watch(SRC_IMAGES + '**/*', gulp.task('images'));
+
+  gulp.watch(SRC_COPYFILE + '**/*', gulp.task('copy'));
+
+  watch(SRC + '**/*', () => {
+    browserSyncSuppressOverReload();
+  });
+
+  done();
 });
+
+gulp.task('default',
+  gulp.series('clean', 'pug', 'copy', 'images', 'js', 'sass', 'watch', 'browser-sync')
+);
+
+
 
 // http://bit.ly/2DgGXLI
 // http://bit.ly/2lKAcJs
