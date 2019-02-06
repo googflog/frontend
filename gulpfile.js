@@ -45,9 +45,9 @@ if (targettype == "stage") {
 // Default
 gulp.task("default", () => {
   if (targettype == "development") {
-    runSequence('pug', 'images', 'sass', 'js', 'watch', 'browser-sync');
+    runSequence('pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
   } else {
-    runSequence('clean', 'pug', 'images', 'sass', 'js', 'watch', 'browser-sync');
+    runSequence('clean', 'pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
   }
 });
 
@@ -65,7 +65,9 @@ gulp.task('watch', function() {
   watch(SRC_IMAGES + '**/*', function() {
     gulp.start('images');
   });
-
+  watch(SRC_COPYFILE + '**/*', function() {
+    gulp.start('copy');
+  });
   gulp.watch(SRC + "**/*", ['browserSyncSuppressOverReload']);
 });
 
@@ -75,6 +77,12 @@ gulp.task('images', function() {
     .pipe(gulp.dest(DIST + DIST_IMAGES));
 });
 
+
+// Copy
+gulp.task('copy', function() {
+  gulp.src('./src/copy/**/*')
+    .pipe(gulp.dest(DIST + DIST_COPYFILE));
+});
 
 // Clean
 gulp.task('clean', function(cb) {

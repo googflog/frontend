@@ -44,6 +44,10 @@ WEBPACK_ENTRY = {
   "contact/contact": "./src/scripts/pages/contact.js"
 }
 
+// とりあえず複製するファイル
+SRC_COPYFILE = './src/copy/';
+DIST_COPYFILE = '/';
+
 // 監視 Source
 SRC = './src/';
 SRC_IMAGES = './src/images/';
