@@ -306,7 +306,7 @@ gulp.task('watch', (done) => {
 
   gulp.watch(SRC_SCSS + '**/*.scss', gulp.task('sass'));
 
-  gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], gulp.task('pug'));
+  gulp.watch(SRC_PUG + '**/*.pug', gulp.task('pug'));
 
   gulp.watch(SRC_IMAGES + '**/*', gulp.task('images'));
 
