@@ -13,6 +13,7 @@ let sourcemaps = require('gulp-sourcemaps');
 let notify = require("gulp-notify");
 let browserSync = require("browser-sync");
 let runSequence = require('run-sequence');
+let watch = require('gulp-watch');
 
 let minimist = require('minimist');
 let del = require('del');
@@ -54,11 +55,18 @@ gulp.task("default", () => {
 // Watchs
 gulp.task('watch', function() {
   // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
-  gulp.watch(SRC_SCSS + '**/*.scss', ['sass']);
-  gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
-  gulp.watch([SRC_IMAGES + '**/*'], ['images']);
+  watch(SRC_SCSS + '**/*.scss', function() {
+    gulp.start('sass');
+  });
+  watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], function() {
+    gulp.start('pug');
+  });
+  // gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
+  watch(SRC_IMAGES + '**/*', function() {
+    gulp.start('images');
+  });
 
-  gulp.watch("src/**/*", ['browserSyncSuppressOverReload']);
+  gulp.watch(SRC + "**/*", ['browserSyncSuppressOverReload']);
 });
 
 

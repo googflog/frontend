@@ -45,6 +45,7 @@ WEBPACK_ENTRY = {
 }
 
 // 監視 Source
+SRC = './src/';
 SRC_IMAGES = './src/images/';
 SRC_JS = './src/scripts/';
 SRC_SCSS = './src/styles/';
