@@ -1,0 +1,113 @@
+
+$imgPath: $IMAGES_PATH;
+.youtube_modal {
+  display: none;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+
+  .youtube_btn_close {
+    
+    position: absolute;
+    
+    background: url($imgPath + 'youtube_btn_close.png') left center no-repeat;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    right: 0px;
+    top: -46px;
+    
+    @include mq-sp {
+      @include bgImg($imgPath + 'sp/youtube_btn_close.png',32,32,750);
+      right: percentage(40/750);
+      top: percentage(-104/750);
+    }
+    // margin-top: percentage(-40/750);
+  }
+
+  &.active {
+    width: 100%;
+    height: 100vh;
+    display: block;
+    background: rgba(#000,0.86);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .movie {
+      width: 90%;
+      padding-bottom: 50.8%;
+      @media screen and (min-width: 1090px) {
+        width: 1024px;
+        height: 576px;
+        padding-bottom: 0;
+      }
+      height: 0;
+      overflow: visible;
+      position: relative;
+
+      #youtube_sp {
+        // background: #b5b5b5;
+        background: url($imgPath + 'youtube_thum.jpg') no-repeat;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+
+      .playbtn_modal_wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 0;
+        padding-bottom: 54.375%;
+        // background: #b5b5b5;
+        background: url($imgPath + 'youtube_thum.jpg') no-repeat;
+        background-size: cover;
+        // transition: all 300ms ease 600ms;
+        opacity: 0;
+        // display: none;
+        visibility: hidden;
+
+        &.active {
+          opacity: 1;
+          // display: block;
+          visibility: visible;
+
+          .playbtn_modal {
+            opacity: 1;
+            transform: scale(1);
+            visibility: visible;
+          }
+        }
+      }
+
+      .playbtn_modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        @include bgImg($imgPath + 'use_playbtn.png',120,120,750);
+        margin: auto;
+        // display: none;
+        visibility: hidden;
+        transition: all 300ms ease 300ms;
+        opacity: 0;
+        transform: scale(0.9);
+        // &.active {
+        //   // display: block;
+        //   opacity: 1;
+        //   transform: scale(1);
+        //   visibility: visible;
+        // }
+      }
+    }
+  }
+}
