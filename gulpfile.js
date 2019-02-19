@@ -125,7 +125,13 @@ gulp.task("js", () => {
         title: "My Project Webpack Build",
         // logo: path.resolve("./img/favicon.png"),
         suppressSuccess: 'true'
-      })
+      }),
+      new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.ProvidePlugin({
+        jQuery: "jquery",
+        $: "jquery",
+        jquery: "jquery"
+      }),
     ]
   }
   gulp.src('')
