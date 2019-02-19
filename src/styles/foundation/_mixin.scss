@@ -1,40 +1,195 @@
 /**
  * Mixin
  */
-// vwサイズを返す
-@function get_vw($size, $viewport:750) {
-  $rate: 100 / $viewport;
-  @return $rate * $size * 1vw;
-}
-@mixin fz_vw($font_size:10) {
-  font-size: $font_size * 1px;
-  font-size: get_vw($font_size);
-}
-//フォントサイズに対してのラインハイトの比率を出す
-@mixin lh_em($size, $lineheight) {
-  line-height: $lineheight / $size + 0em;
-}
-
-//背景に画像を指定
-@mixin bgImg($path,$w,$h,$base) {
-  @if($path!='none') {
-    background: url($path) no-repeat;
-    background-size: contain;
+ 
+  // vw基準のcalc返す $viewport == PSDの横幅
+  @function calc-w($size, $viewport:750) {
+    @return calc(100vw * (#{$size} / #{$viewport}));
   }
-  display: block;
-  height: 0;
-  max-width: $w + 0px;
-  width: percentage($w/$base);
-  padding-bottom: percentage($h/$base);
-  margin: 0;
-  overflow: hidden;
-  text-indent: -999em;
-  @media screen and (min-width: 1280px) {
-    padding: 0;
-    height: $h + 0px;
+  @function calc-w-pc($size, $viewport:1280) {
+    @return calc(100vw * (#{$size} / #{$viewport}));
   }
-}
+  @function calc-w-tablet($size, $viewport:1000) {
+    @return calc(100vw * (#{$size} / #{$viewport}));
+  }
+  @function calc-w-sp($size, $viewport:750) {
+    @return calc(100vw * (#{$size} / #{$viewport}));
+  }
+  //
+  //
+  //
+  // vw基準のmarginを設定
+  @mixin margin_calc($top:auto, $right:auto, $bottom:auto, $left:auto, $viewport:750) {
+    @if $top != auto {
+      @if $top == 0 {
+        $top: 0;
+      } @else {
+        $top: calc-w(#{$top},#{$viewport});
+      }
+    }
+    @if $bottom!=auto {
+      @if $bottom == 0 {
+        $bottom: 0;
+      } @else {
+        $bottom: calc-w(#{$bottom},#{$viewport});
+      }
+    }
+    @if $left!=auto {
+      @if $left == 0 {
+        $left: 0;
+      } @else {
+        $left: calc-w(#{$left},#{$viewport});
+      }
+    }
+    @if $right!=auto {
+      @if $right == 0 {
+        $right: 0;
+      } @else {
+        $right: calc-w(#{$right},#{$viewport});
+      }
+    }
+    margin: $top $right $bottom $left;
+  }
+  //
+  @mixin margin_calc-pc($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    @include margin_calc($top,$right,$bottom,$left,1280);
+  }
+  @mixin margin_calc-tablet($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    @include margin_calc($top,$right,$bottom,$left,1000);
+  }
+  @mixin margin_calc-sp($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    @include margin_calc($top,$right,$bottom,$left,750);
+  }
+  //
+  //
+  //
+  // vw基準のpaddingを設定
+  @mixin padding_calc($top:auto, $right:auto, $bottom:auto, $left:auto, $viewport:750) {
+    @if $top != auto {
+      @if $top == 0 {
+        $top: 0;
+      } @else {
+        $top: calc-w(#{$top},#{$viewport});
+      }
+    }
+    @if $bottom!=auto {
+      @if $bottom == 0 {
+        $bottom: 0;
+      } @else {
+        $bottom: calc-w(#{$bottom},#{$viewport});
+      }
+    }
+    @if $left!=auto {
+      @if $left == 0 {
+        $left: 0;
+      } @else {
+        $left: calc-w(#{$left},#{$viewport});
+      }
+    }
+    @if $right!=auto {
+      @if $right == 0 {
+        $right: 0;
+      } @else {
+        $right: calc-w(#{$right},#{$viewport});
+      }
+    }
+    padding: $top $right $bottom $left;
+  }
+  //
+  @mixin padding_calc-pc($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    @include padding_calc($top,$right,$bottom,$left,1280);
+  }
+  @mixin padding_calc-tablet($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    @include padding_calc($top,$right,$bottom,$left,1000);
+  }
+  @mixin padding_calc-sp($top:auto, $right:auto, $bottom:auto, $left:auto) {
+    @include padding_calc($top,$right,$bottom,$left,750);
+  }
+  //
+  //
+  //
+  // vw基準のサイズを設定
+  @mixin wh_calc($w_size:null, $h_size:null, $viewport:1280) {
+    @if $w_size {
+      max-width: #{$w_size}px;
+      width: calc-w(#{$w_size} , #{$viewport});
+    } @else {
+      max-width: none;
+    }
+    @if $h_size {
+      max-height: #{$h_size}px;
+      height: calc-w(#{$h_size} , #{$viewport});
+    } @else {
+      max-height: none;
+    }
+  }
+  // vw基準のサイズを設定 PC
+  @mixin wh_calc-pc($w_size:null, $h_size:null, $viewport:1280) {
+    @include wh_calc($w_size,$h_size,1280);
+  }
+  // vw基準のサイズを設定 SP
+  @mixin wh_calc-tablet($w_size:null, $h_size:null) {
+    @include wh_calc($w_size,$h_size,1000);
+  }
+  // vw基準のサイズを設定 SP
+  @mixin wh_calc-sp($w_size:null, $h_size:null) {
+    @include wh_calc($w_size,$h_size,750);
+  }
+  //
+  //
+  //
+  @mixin font_set($fz-pc, $lh-pc, $ls-pc, $fz-sp, $lh-sp, $ls-sp) {
+    @include mq-pc {
+      font-size: #{$fz-pc}px;
+      line-height: #{$lh-pc}px;
+      letter-spacing: #{$ls-pc}em;
+    }
+    @include mq-tablet {
+      font-size: #{$fz-pc}px;
+      line-height: #{$lh-pc}px;
+      letter-spacing: #{$ls-pc}em;
+    }
+    @include mq-sp {
+      @include fz_vw($fz-sp);
+      @include lh_em($fz-sp,$lh-sp);
+      letter-spacing: #{$ls-sp}em;
+    }
+  }
+  
+  
+ // vwサイズを返す
+ @function get_vw($size, $viewport:750) {
+   $rate: 100 / $viewport;
+   @return $rate * $size * 1vw;
+ }
+ @mixin fz_vw($font_size:10) {
+   font-size: $font_size * 1px;
+   font-size: get_vw($font_size);
+ }
+ //フォントサイズに対してのラインハイトの比率を出す
+ @mixin lh_em($size, $lineheight) {
+   line-height: $lineheight / $size + 0em;
+ }
 
+ //背景に画像を指定
+ @mixin bgImg($path,$w,$h,$base) {
+   @if($path!='none') {
+     background: url($path) no-repeat;
+     background-size: contain;
+   }
+   display: block;
+   height: 0;
+   max-width: $w + 0px;
+   width: percentage($w/$base);
+   padding-bottom: percentage($h/$base);
+   margin: 0;
+   overflow: hidden;
+   text-indent: -999em;
+   @media screen and (min-width: 1280px) {
+     padding: 0;
+     height: $h + 0px;
+   }
+ }
 //クリアフィックス
 @mixin clearfix {
   &:after {
