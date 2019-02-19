@@ -126,7 +126,8 @@ gulp.task("js", () => {
         // logo: path.resolve("./img/favicon.png"),
         suppressSuccess: 'true'
       }),
-      new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.optimize.AggressiveMergingPlugin(), //ファイルを細かく分析し、まとめられるところはまとめてコード圧縮
+      // JQuery / JQueryライブラリのための定義（Jquery絶対使わないってプロジェクトのときは消去）
       new webpack.ProvidePlugin({
         jQuery: "jquery",
         $: "jquery",
