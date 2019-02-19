@@ -22,7 +22,7 @@ append vars
 
 
 block content
-  h1 DemoPage
+  //h1 DemoPage
 
   if TARGETTYPE == 'development'
     p.mode.mode-development development
@@ -31,12 +31,12 @@ block content
   if TARGETTYPE == 'production'
     p.mode.mode-production production
 
-  figure.img
+  //figure.img
     img(src = IMAGES_PATH + "test/test.jpg")
 
-  #youtube
+  //#youtube
 
-  ul
+  //ul
     li
       a.button.is-large.js-shareSNS-facebook(href="#" data-url="https://www.yahoo.co.jp/") Facebook
     li
@@ -49,3 +49,21 @@ block content
       a.button.is-large(href="bulma").js-shareSNS-twitter BlumaTest
     li
       a.button.is-large(href="contact") CONTACT
+      br
+
+  br
+  br
+  br
+  br
+  #app.
+    {{ message }}
+  br
+  br
+  br
+  br
+  #app2
+    p Length: {{ length }}
+    ul
+      li( v-for="(item, i) in list" :key="item") {{ item }}
+        button( @click="list.splice(i, 1)") remove
+    button( @click="addItem") add
