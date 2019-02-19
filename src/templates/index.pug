@@ -24,32 +24,32 @@ append vars
 block content
   //h1 DemoPage
 
-  if TARGETTYPE == 'development'
-    p.mode.mode-development development
-  if TARGETTYPE == 'stage'
-    p.mode.mode-stage stage
-  if TARGETTYPE == 'production'
-    p.mode.mode-production production
+    if TARGETTYPE == 'development'
+      p.mode.mode-development development
+    if TARGETTYPE == 'stage'
+      p.mode.mode-stage stage
+    if TARGETTYPE == 'production'
+      p.mode.mode-production production
 
-  //figure.img
-    img(src = IMAGES_PATH + "test/test.jpg")
+    figure.img
+      img(src = IMAGES_PATH + "test/test.jpg")
 
-  //#youtube
+    #youtube
 
-  //ul
-    li
-      a.button.is-large.js-shareSNS-facebook(href="#" data-url="https://www.yahoo.co.jp/") Facebook
-    li
-      a.button.is-large.js-shareSNS-google(href="#" data-url="https://www.yahoo.co.jp/") Google＋
-    li
-      a.button.is-large.js-shareSNS-twitter(href="#" data-url="https://www.yahoo.co.jp/" data-text="シェア文言１" data-hash="ハッシュ１") Twitter１
-    li
-      a.button.is-large.js-tw(href="#" data-url="https://www.yahoo.co.jp/" data-text="シェア文言２" data-hash="ハッシュ２") Twitter２
-    li
-      a.button.is-large(href="bulma").js-shareSNS-twitter BlumaTest
-    li
-      a.button.is-large(href="contact") CONTACT
-      br
+    ul
+      li
+        a.button.is-large.js-shareSNS-facebook(href="#" data-url="https://www.yahoo.co.jp/") Facebook
+      li
+        a.button.is-large.js-shareSNS-google(href="#" data-url="https://www.yahoo.co.jp/") Google＋
+      li
+        a.button.is-large.js-shareSNS-twitter(href="#" data-url="https://www.yahoo.co.jp/" data-text="シェア文言１" data-hash="ハッシュ１") Twitter１
+      li
+        a.button.is-large.js-tw(href="#" data-url="https://www.yahoo.co.jp/" data-text="シェア文言２" data-hash="ハッシュ２") Twitter２
+      li
+        a.button.is-large(href="bulma").js-shareSNS-twitter BlumaTest
+      li
+        a.button.is-large(href="contact") CONTACT
+        br
 
   br
   br
