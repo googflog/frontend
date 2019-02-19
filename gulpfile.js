@@ -123,7 +123,7 @@ gulp.task("js", () => {
     plugins: [
       new WebpackBuildNotifierPlugin({
         title: "My Project Webpack Build",
-        // logo: path.resolve("./img/favicon.png"),
+        logo: SRC_IMAGES + "favicon.png",
         suppressSuccess: 'true'
       }),
       new webpack.optimize.AggressiveMergingPlugin(), //ファイルを細かく分析し、まとめられるところはまとめてコード圧縮
