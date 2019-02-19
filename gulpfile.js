@@ -18,8 +18,6 @@ let watch = require('gulp-watch');
 let minimist = require('minimist');
 let del = require('del');
 
-let VueLoaderPlugin = require('vue-loader/lib/plugin'); // vue-loader
-
 // webpackの設定ファイルの読み込み
 let config = require("./config");
 
@@ -107,39 +105,20 @@ gulp.task("js", () => {
     output: {
       filename: "[name].js"
     },
-    resolve: {
-      // vue aliasを追加
-      alias: {
-        'vue$': 'vue/dist/vue.esm.js'
-      }
-    },
     module: {
       rules: [{
-          test: /\.vue$/,
-          loader: 'vue-loader',
+        test: /\.js$/,
+        use: [{
+          loader: 'babel-loader',
           options: {
-            options: {
-              presets: [
-                'es2015'
-              ],
-            },
-          },
-        }, {
-          test: /\.js$/, // 変換するファイルを特定
-          exclude: /(node_modules | bower_components)/, // 除外するファイルを指定
-          use: [{ //変換に使うローダを指定
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                ['es2015', {
-                  'modules': false
-                }]
-              ]
-            }
-          }]
-        }
-
-      ]
+            presets: [
+              ['es2015', {
+                'modules': false
+              }]
+            ]
+          }
+        }]
+      }]
     },
     plugins: [
       new WebpackBuildNotifierPlugin({
@@ -153,8 +132,6 @@ gulp.task("js", () => {
         $: "jquery",
         jquery: "jquery"
       }),
-      // vueコンポーネント
-      new VueLoaderPlugin(),
     ]
   }
   gulp.src('')
@@ -298,9 +275,6 @@ gulp.task('browserSyncSuppressOverReload', () => {
   }, 500);
 });
 
-// http://bit.ly/2NevVen
-// http://bit.ly/2Nex31A
-// http://bit.ly/2NfwRyV
 // http://bit.ly/2DgGXLI
 // http://bit.ly/2lKAcJs
 // http://bit.ly/2ItoUlN

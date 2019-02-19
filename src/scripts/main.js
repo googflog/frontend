@@ -6,7 +6,6 @@ import {
   TimelineLite
 } from "gsap/TweenMax";
 
-import Vue from 'vue';
 // sub.jsファイルを読み込む
 import {
   hello
@@ -28,39 +27,6 @@ YTPlayer.loadAPI(function() {
     showinfo: 0
   });
 })
-
-
-
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello Vue!'
-  }
-})
-
-
-new Vue({
-  el: '#app2',
-  data: {
-    counter: 0,
-    list: ['Apple', 'Banana', 'Strawberry']
-  },
-  computed: {
-    length: function() {
-      return this.list.length
-    }
-  },
-  methods: {
-    addItem: function() {
-      this.list.push('Orange' + (++this.counter).toString())
-    }
-  }
-})
-
-
-
-
 
 
 $(function() {
