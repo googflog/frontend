@@ -17,17 +17,40 @@
 `npm run production`
 
 ### メモ
-TODO: 変更しないJSに変更があった場合反映されない
-TODO: 画像が追加された際にブラウザリロードが効かない
-TODO: SPとPCでページが分かれる場合はどうする？
 
-TODO: スタイルガイドとか作れるようにする？
+####JSファイルの修正方法
 
-TODO: FLOCSS？
+下記の例では `./src/scripts/main.js` にあるファイルを`assets/scripts/app.js` にWebpackで書き出しています。
+設定している場所は`config.js` の下記の45行目ぐらいです。
+```
+// WebPack JS
+    WEBPACK_ENTRY = {
+    "assets/scripts/app": "./src/scripts/main.js",
+}
+```
 
-TODO: CSSブレイクポイント
-ミックスイン、クラス
+新たにJSファイルを作りたい場合、下記を参考にしてください。
+書き出し元ファイル`rekishi_source.js`  を元に`assets/scripts/history/` フォルダに `rekishi.js` ファイルをWebpackで書き出します。
+```
+// WebPack JS
+WEBPACK_ENTRY = {
+  "assets/scripts/app": "./src/scripts/main.js",
+  "assets/scripts/history/rekishi": "./src/scripts/pages/rekishi_source.js"
+}
+```
 
-TODO: JSブレイクポイント
+##### 何に使っているかよくわからないけど、本番サーバ上にあるデータを新しいページにも置きたい場合
 
-TODO: JSデモ
+`src/copy`にディレクトリの構造を再現して該当ファイルを置くと、そのディレクトの構造を保ったままデータをコピーします。
+
+現状本番上に上がっている、営業日情報を取得してカレンダーにして表示する js ファイルをとりあえず置いています。 `src/copy/assets/scripts/calendar.js`
+
+##### ブレイクポイント
+SP縦
+`〜 600px`
+
+SP横、タブレット
+`601px 〜 1000px`
+
+PC
+`1001px 〜` 
