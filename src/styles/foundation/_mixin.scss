@@ -6,13 +6,13 @@
   @function calc-w($size, $viewport:750) {
     @return calc(100vw * (#{$size} / #{$viewport}));
   }
-  @function calc-w-pc($size, $viewport:1280) {
+  @function calc-pc($size, $viewport:1280) {
     @return calc(100vw * (#{$size} / #{$viewport}));
   }
-  @function calc-w-tablet($size, $viewport:1000) {
+  @function calc-tablet($size, $viewport:1000) {
     @return calc(100vw * (#{$size} / #{$viewport}));
   }
-  @function calc-w-sp($size, $viewport:750) {
+  @function calc-sp($size, $viewport:750) {
     @return calc(100vw * (#{$size} / #{$viewport}));
   }
   //
@@ -203,30 +203,79 @@
   text-indent: 100%;
   white-space: nowrap;
 }
-
-.u-sp {
-  @media screen and (min-width: 768px) {
-    display: none;
-  }
-}
-
+//
+//
+//
+// PC
 .u-pc {
-  @media screen and (max-width: 768px - 1) {
+  @media screen and (max-width: 1000px) {
     display: none;
   }
 }
-// PC, TABLET
+// タブレット or SP横向き or PC
+.u-tablet_pc {
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+}
+// タブレット or SP横向き
+.u-tablet {
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+  @media screen and (min-width: 1001px) {
+    display: none;
+  }
+}
+// SP縦向き or タブレット or SP横向き
+.u-sp_tablet {
+  @media screen and (min-width: 1001px) {
+    display: none;
+  }
+}
+// SP縦向き
+.u-sp {
+  @media screen and (min-width: 601px) {
+    display: none;
+  }
+}
+//
+//
+//
+// PC
 @mixin mq-pc {
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1001px) {
     @content;
   }
 }
-// SMART PHONE
+// タブレット or SP横向き or PC
+@mixin mq-tablet_pc {
+  @media screen and (min-width: 601px) {
+    @content;
+  }
+}
+// タブレット or SP横向き
+@mixin mq-tablet {
+  @media screen and (min-width: 601px) and (max-width: 1000px) {
+    @content;
+  }
+}
+// SP縦向き or タブレット or SP横向き
+@mixin mq-sp_tablet {
+  @media screen and (max-width: 1000px) {
+    @content;
+  }
+}
+// SP縦向き
 @mixin mq-sp {
-  @media screen and (max-width: 768px - 1) {
+  @media screen and (max-width: 600px) {
     @content;
   }
 }
+
+//
+//
+//
 // landscape
 @mixin mq-landscape {
   @media screen and (orientation: landscape) {
