@@ -240,7 +240,10 @@ const pugOptions = {
 
     LANG: LANG,
 
-    IMAGES_PATH: IMAGES_PATH,
+    IMAGES_PATH: targettype == "prod" ? IMAGES_PATH : targettype == "stage" ? IMAGES_PATH_STAG : IMAGES_PATH_PROD,
+
+    SITE_PATH: targettype == "prod" ? SITE_PATH_HTML_PROD : targettype == "stage" ? SITE_PATH_HTML_STAG : SITE_PATH_HTML,
+
 
     JS_PATH: jsPathSet(),
     CSS_PATH: cssPathSet(),
