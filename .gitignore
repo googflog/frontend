@@ -1,6 +1,6 @@
 .DS_Store
 .Thumb_DB
-package-lock.json
+.idea/
 node_modules/
 stage/
 dist/
