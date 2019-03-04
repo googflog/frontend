@@ -34,6 +34,10 @@ CSS_PATH = "/assets/styles/";
 CSS_PATH_STAG = CSS_PATH;
 CSS_PATH_PROD = CSS_PATH;
 
+SITE_PATH_HTML = '/';
+SITE_PATH_HTML_STAG = '/stage/';
+SITE_PATH_HTML_PROD = '/';
+
 
 // Pug Options HTML圧縮
 PUG_PRETTY = true
