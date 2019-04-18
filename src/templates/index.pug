@@ -23,6 +23,7 @@ append vars
 
 block content
   h1 DemoPage
+
   if TARGETTYPE == 'development'
     p.mode.mode-development development
   if TARGETTYPE == 'stage'
@@ -30,17 +31,32 @@ block content
   if TARGETTYPE == 'production'
     p.mode.mode-production production
 
+  p.mode.mode-css
+
   figure.img
-    img(src = IMAGES_PATH + "test/test.jpg")
-
-  .use_class_query_change
-    .u-pc 🖥
-    .u-sp 📱
-
-  .medea_query_screen_width
-  .medea_query_screen_aspect
+    img(src = IMAGES_PATH + "img_0.png")
 
   #youtube
+
+  //- Swiper
+  ul.swiper-container
+    .swiper-wrapper
+      li.swiper-slide
+        img(src = IMAGES_PATH + "img_1.png")
+      li.swiper-slide
+        img(src = IMAGES_PATH + "img_2.png")
+      li.swiper-slide
+        img(src = IMAGES_PATH + "img_3.png")
+      li.swiper-slide
+        img(src = IMAGES_PATH + "img_1.png")
+      li.swiper-slide
+        img(src = IMAGES_PATH + "img_2.png")
+      li.swiper-slide
+        img(src = IMAGES_PATH + "img_3.png")
+    .swiper-pagination
+    .swiper-button-prev
+    .swiper-button-next
+    .swiper-scrollbar
 
   ul
     li

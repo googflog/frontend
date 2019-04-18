@@ -24,7 +24,7 @@ let config = require("./config");
 
 let argv = minimist(process.argv.slice(2));
 let targettype = argv.env;
-//
+
 
 let DIST = '';
 if (targettype == "stage") {
@@ -41,60 +41,56 @@ if (targettype == "stage") {
 
 }
 
-function task1(done) {
-  console.log('task 1');
-  setTimeout(function() {
-    console.log('task 1 >> 1100ms');
-    done();
-  }, 1100);
-}
 
-function task2(done) {
-  console.log('task 2');
-  setTimeout(function() {
-    console.log('task 2 >> 1000ms');
-    done();
-  }, 1000);
-}
-
-function task3(done) {
-  console.log('task 3');
-  done();
-}
-gulp.task('two', function(done) {
-  // do stuff
-  done();
+// Default
+gulp.task("default", () => {
+  console.log('🚀', 'Build', '🚀');
+  runSequence('clean', 'pug', 'copy', 'images', 'sass', 'js', 'watch', 'browser-sync');
 });
 
 
-gulp.task('images', (done) => {
+// Watchs
+gulp.task('watch', function() {
+  // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
+  watch(SRC_SCSS + '**/*.scss', function() {
+    gulp.start('sass');
+  });
+  watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], function() {
+    gulp.start('pug');
+  });
+  // gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
+  watch(SRC_IMAGES + '**/*', function() {
+    gulp.start('images');
+  });
+  watch(SRC_COPYFILE + '**/*', function() {
+    gulp.start('copy');
+  });
+  watch(SRC + "**/*", function() {
+    gulp.start('browserSyncSuppressOverReload');
+  });
+});
+
+
+gulp.task('images', function() {
   gulp.src(SRC_IMAGES + '**/*')
     .pipe(gulp.dest(DIST + DIST_IMAGES));
-  done();
 });
 
 
 // Copy
-gulp.task('copy', (done) => {
+gulp.task('copy', function() {
   gulp.src('./src/copy/**/*')
     .pipe(gulp.dest(DIST + DIST_COPYFILE));
-  done();
 });
 
 // Clean
-gulp.task('clean', (cb) => {
-  // return del(DIST + '*', cb);
-  if (targettype != "development") {
-    return del(DIST + '*', cb);
-  } else {
-    cb();
-    return true;
-  }
+gulp.task('clean', function(cb) {
+  return del(DIST + '*', cb);
 });
 
 
 // Js
-gulp.task("js", (done) => {
+gulp.task("js", () => {
   var MODE = "development";
   if (targettype == "production") {
     MODE = "production";
@@ -124,30 +120,35 @@ gulp.task("js", (done) => {
     plugins: [
       new WebpackBuildNotifierPlugin({
         title: "My Project Webpack Build",
-        // logo: path.resolve("./img/favicon.png"),
+        logo: SRC_IMAGES + "favicon.png",
         suppressSuccess: 'true'
-      })
+      }),
+      new webpack.optimize.AggressiveMergingPlugin(), //ファイルを細かく分析し、まとめられるところはまとめてコード圧縮
+      // JQuery / JQueryライブラリのための定義（Jquery絶対使わないってプロジェクトのときは消去）
+      new webpack.ProvidePlugin({
+        jQuery: "jquery",
+        $: "jquery",
+        jquery: "jquery"
+      }),
     ]
   }
-  gulp.src(SRC_JS)
+  gulp.src('')
     .pipe(webpackStream(webpackOption, webpack))
     .pipe(plumber())
     .pipe(gulp.dest(DIST));
-
-  done();
-  return true;
 });
 
 
 // Sass
-gulp.task('sass', () => {
+gulp.task('sass', function() {
   if (targettype == "production") {
     return gulp.src(SRC_SCSS + '**/*.scss')
       .pipe(plumber({
         errorHandler: notify.onError("Error: <%= error.message %>")
       }))
       .pipe(sassVariables({
-        $IMAGES_PATH: IMAGES_PATH_PROD
+        $IMAGES_PATH: IMAGES_PATH_PROD,
+        $TARGETTYPE: targettype
       }))
       .pipe(sass({
         outputStyle: 'compressed'
@@ -161,7 +162,8 @@ gulp.task('sass', () => {
       }))
       .pipe(sourcemaps.init())
       .pipe(sassVariables({
-        $IMAGES_PATH: IMAGES_PATH_STAG
+        $IMAGES_PATH: IMAGES_PATH_STAG,
+        $TARGETTYPE: targettype
       }))
       .pipe(sass({
         outputStyle: 'expanded'
@@ -176,7 +178,8 @@ gulp.task('sass', () => {
       }))
       .pipe(sourcemaps.init())
       .pipe(sassVariables({
-        $IMAGES_PATH: IMAGES_PATH
+        $IMAGES_PATH: IMAGES_PATH,
+        $TARGETTYPE: targettype
       }))
       .pipe(sass({
         outputStyle: 'expanded'
@@ -237,7 +240,10 @@ const pugOptions = {
 
     LANG: LANG,
 
-    IMAGES_PATH: IMAGES_PATH,
+    IMAGES_PATH: targettype == "prod" ? IMAGES_PATH : targettype == "stage" ? IMAGES_PATH_STAG : IMAGES_PATH_PROD,
+
+    SITE_PATH: targettype == "prod" ? SITE_PATH_HTML_PROD : targettype == "stage" ? SITE_PATH_HTML_STAG : SITE_PATH_HTML,
+
 
     JS_PATH: jsPathSet(),
     CSS_PATH: cssPathSet(),
@@ -245,6 +251,8 @@ const pugOptions = {
     TARGETTYPE: targettype
   }
 }
+
+
 
 //Browser Sync
 gulp.task('browser-sync', () => {
@@ -257,7 +265,7 @@ gulp.task('browser-sync', () => {
 });
 
 var timeoutidBs;
-const browserSyncSuppressOverReload = () => {
+gulp.task('browserSyncSuppressOverReload', () => {
   clearTimeout(timeoutidBs);
   timeoutidBs = setTimeout(function() {
     browserSync.reload();
@@ -269,33 +277,7 @@ const browserSyncSuppressOverReload = () => {
       console.log("🥚 " + targettype + " 🥚");
     }
   }, 500);
-};
-
-// Watchs
-gulp.task('watch', (done) => {
-
-  // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
-
-  gulp.watch(SRC_SCSS + '**/*.scss', gulp.task('sass'));
-
-  gulp.watch(SRC_PUG + '**/*.pug', gulp.task('pug'));
-
-  gulp.watch(SRC_IMAGES + '**/*', gulp.task('images'));
-
-  gulp.watch(SRC_COPYFILE + '**/*', gulp.task('copy'));
-
-  watch(SRC + '**/*', () => {
-    browserSyncSuppressOverReload();
-  });
-
-  done();
 });
-
-gulp.task('default',
-  gulp.series('clean', 'pug', 'copy', 'images', 'js', 'sass', 'watch', 'browser-sync')
-);
-
-
 
 // http://bit.ly/2DgGXLI
 // http://bit.ly/2lKAcJs

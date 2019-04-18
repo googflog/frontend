@@ -1,13 +1,10 @@
+$targettype: $TARGETTYPE;
 $page_class: page-top;
 $imgPath: $IMAGES_PATH;
 
 .#{$page_class} {
   // font-size: 1.5rem;
   // background: url($imgPath + 'testn.jpg' ) ;
-  *{
-    box-sizing: border-box;
-  }
-  
   .l-main {
     width: 980px;
     margin: 0 auto;
@@ -47,6 +44,32 @@ $imgPath: $IMAGES_PATH;
     @include mq-sp {
       @include fz_vw(20);
     }
+
+    &-css {
+      position: relative;
+
+      &:before {
+        content: $targettype;
+      }
+    }
+
+    @if $targettype == "development" {
+      &-css {
+        background: yellow;
+      }
+    }
+
+    @if $targettype == "stage" {
+      &-css {
+        background: rgb(71, 216, 255);
+      }
+    }
+
+    @if $targettype == "production" {
+      &-css {
+        background: rgb(119, 88, 207);
+      }
+    }
   }
 
   .img img {
@@ -62,67 +85,14 @@ $imgPath: $IMAGES_PATH;
     display: flex;
     justify-content: space-between;
   }
-  
-  .use_class_query_change{
-    padding: 0.5em 2em;
-    font-size: 5em;
-    text-align: center;
-  }
-  
-  .medea_query_screen_width {
-    padding: 1em 2em;
-    font-size: 5em;
-    text-align: center;
-    position: relative;
-    &:before {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      margin: auto;
-      height: 1em;
-    }
-    @include mq-pc {
-      &:before {
-        content: "🖥";
-      }
-    }
-    @include mq-tablet {
-      &:before {
-      	content: "📠";
-      }
-    }
-    @include mq-sp {
-      &:before {
-      	content: "📱";
-      }
-    }
-  }
 
-  .medea_query_screen_aspect {
-    padding: 1em 2em;
-    font-size: 5em;
-    text-align: center;
-    position: relative;
-    &:before {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      margin: auto;
-      height: 1em;
-    }
-    @include mq-landscape {
-      &:before {
-        content: "横長";
-      }
-    }
-    @include mq-portrait {
-      &:before {
-      	content: "縦長";
-      }
+  // Swiper
+  .swiper-container {
+    width: 600px;
+    height: 300px;
+
+    img {
+      width: 100%;
     }
   }
 }

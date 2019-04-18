@@ -8,11 +8,11 @@ SITE_NAME = "サイトタイトル";
 SITE_URL = "http://example.com/production";
 SITE_DESCRIPTION = "ディスプリプション";
 SITE_KEYWORDS = "キーワード,キーワード,キーワード";
-SITE_OGP_URL = "http://example.com/production";
-SITE_OGP_TITLE = "サイトタイトル";
-SITE_OGP_DESCRIPTION = "ディスプリプション";
-SITE_OGP_IMAGE = "ogp.jpg";
-SITE_OGP_SITE_NAME = "サイトタイトル";
+SITE_OGP_URL = SITE_URL;
+SITE_OGP_TITLE = SITE_NAME;
+SITE_OGP_DESCRIPTION = SITE_DESCRIPTION;
+SITE_OGP_IMAGE = "ogp.png";
+SITE_OGP_SITE_NAME = SITE_NAME;
 SITE_OGP_TYPE = "article";
 SITE_OGP_LOCALE = "ja_JP";
 SITE_OGP_APP_ID = "";
@@ -33,6 +33,10 @@ JS_PATH_PROD = JS_PATH;
 CSS_PATH = "/assets/styles/";
 CSS_PATH_STAG = CSS_PATH;
 CSS_PATH_PROD = CSS_PATH;
+
+SITE_PATH_HTML = '/';
+SITE_PATH_HTML_STAG = '/stage/';
+SITE_PATH_HTML_PROD = '/';
 
 
 // Pug Options HTML圧縮
