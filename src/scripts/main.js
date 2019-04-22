@@ -29,7 +29,7 @@ console.log("MASTER_DATA", MASTER_DATA);
 // Youtube 埋め込み
 let ytp;
 YTPlayer.loadAPI(function() {
-  ytp = new YTPlayer("youtube", "3QJDC-kRwZU", 600, 0, {
+  ytp = new YTPlayer("youtube", "iiuoiBEWuaI", 600, 0, {
     autoplay: 0,
     rel: 0,
     showinfo: 0
@@ -71,7 +71,7 @@ $(function() {
   // Lodashのテンプレート のテンプレート
   $('body').append(testElement({
     class: 'testTemp',
-    txt: 'テストテンプレート'
+    txt: '🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑'
   }));
 
 
