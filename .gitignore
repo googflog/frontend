@@ -2,5 +2,5 @@
 .Thumb_DB
 package-lock.json
 node_modules/
-stage/
-dist/
+dist/dev/
+dist/stage/

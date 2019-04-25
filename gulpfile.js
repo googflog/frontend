@@ -28,15 +28,15 @@ let targettype = argv.env;
 
 let DIST = '';
 if (targettype == "stage") {
-  DIST = './stage/';
+  DIST = './dist/stage/';
   console.log("🐥", targettype, "🐥");
 
 } else if (targettype == "production") {
-  DIST = './prod/';
+  DIST = './dist/prod/';
   console.log("🐓", targettype, "🐓");
 
 } else {
-  DIST = './dist/';
+  DIST = './dist/dev/';
   console.log("🥚", targettype, "🥚");
 
 }

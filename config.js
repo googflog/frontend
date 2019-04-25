@@ -65,4 +65,4 @@ DIST_CSS = './assets/styles/';
 DIST_HTML = './';
 
 // JS,CSS キャッシュ防止
-VERSION = "?v="+ Date.now();
+VERSION = "";//"?v="+ Date.now();
