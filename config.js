@@ -1,5 +1,4 @@
-//アセットルート、テンプレートルートですトスr−と
-
+//
 DIST_SITE_URL = "http://example.com/dev";
 STAGE_SITE_URL = "http://example.com/stage";
 
@@ -40,7 +39,7 @@ SITE_PATH_HTML_PROD = '/';
 
 
 // Pug Options HTML圧縮
-PUG_PRETTY = true
+PUG_PRETTY = true;
 
 // WebPack JS
 WEBPACK_ENTRY = {
