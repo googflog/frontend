@@ -172,7 +172,7 @@ gulp.task("sass", function() {
           outputStyle: "compressed"
         })
       )
-      .pipe(autoprefixer())
+      .pipe(autoprefixer({grid:true}))
       .pipe(gulp.dest(DIST + DIST_CSS));
   } else if (targettype == "stage") {
     return gulp
@@ -194,7 +194,7 @@ gulp.task("sass", function() {
           outputStyle: "expanded"
         })
       )
-      .pipe(autoprefixer())
+      .pipe(autoprefixer({grid:true}))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(DIST + DIST_CSS));
   } else {
@@ -217,7 +217,7 @@ gulp.task("sass", function() {
           outputStyle: "expanded"
         })
       )
-      .pipe(autoprefixer())
+      .pipe(autoprefixer({grid:true}))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(DIST + DIST_CSS));
   }
