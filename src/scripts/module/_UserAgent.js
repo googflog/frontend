@@ -113,7 +113,7 @@ export function isAndroidSp() {
  * @returns {boolean}
  */
 export function isSp() {
-  return this.isAndroidSp() || this.isIphone()
+  return isAndroidSp() || isIphone()
 }
 
 /**
@@ -129,7 +129,7 @@ export function isIpad() {
  * @returns {boolean}
  */
 export function isAndroidTab() {
-  return ua.indexOf('android') != -1 && !this.isAndroidSp()
+  return ua.indexOf('android') != -1 && !isAndroidSp()
 }
 
 /**
@@ -137,7 +137,7 @@ export function isAndroidTab() {
  * @returns {boolean}
  */
 export function isTablet() {
-  return this.isIpad() || this.isAndroidTab()
+  return isIpad() || isAndroidTab()
 }
 
 /**
@@ -145,7 +145,7 @@ export function isTablet() {
  * @returns {boolean}
  */
 export function isMobile() {
-  return this.isSp() || this.isTablet()
+  return isSp() || isTablet()
 }
 
 /**
@@ -153,7 +153,7 @@ export function isMobile() {
  * @returns {boolean}
  */
 export function isIos() {
-  return this.isIphone() || this.isIpad()
+  return isIphone() || isIpad()
 }
 
 /**
