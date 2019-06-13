@@ -58,7 +58,7 @@ gulp.task("watch", function() {
   watch(SRC_SCSS + "**/*.scss", function() {
     gulp.start("sass");
   });
-  watch([SRC_PUG + "**/*.pug", "!" + SRC_PUG + "**/_*.pug"], function() {
+  watch([SRC_PUG + "**/*.pug"], function() {
     gulp.start("pug");
   });
   // gulp.watch([SRC_PUG + '**/*.pug', '!' + SRC_PUG + '**/_*.pug'], ['pug']);
