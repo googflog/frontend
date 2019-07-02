@@ -16,6 +16,10 @@ let browserSync = require("browser-sync");
 let runSequence = require("run-sequence");
 let watch = require("gulp-watch");
 
+let pngquant = require("imagemin-pngquant");
+let mozjpeg = require("imagemin-mozjpeg");
+let imagemin = require("gulp-imagemin");
+
 let minimist = require("minimist");
 let del = require("del");
 
@@ -73,9 +77,28 @@ gulp.task("watch", function() {
   });
 });
 
+// Images
 gulp.task("images", function() {
-  gulp.src(SRC_IMAGES + "**/*").pipe(gulp.dest(DIST + DIST_IMAGES));
+  gulp
+    .src(SRC_IMAGES + "**/*.{jpg,jpeg,png,gif,svg}")
+    .pipe(
+      imagemin([
+        pngquant("65-80"),
+        mozjpeg({ quality: 80 }),
+        imagemin.svgo(),
+        imagemin.gifsicle()
+      ])
+    )
+    .pipe(gulp.dest(DIST + DIST_IMAGES));
+  gulp
+    .src(SRC_IMAGES + "**/*.{mp4,mp3,webm}")
+    .pipe(gulp.dest(DIST + DIST_IMAGES));
 });
+// gulp.task("images", function() {
+//   gulp
+//     .src("!" + SRC_IMAGES + "**/*")
+//     .pipe(gulp.dest(DIST + DIST_IMAGES));
+// });
 
 // Copy
 gulp.task("copy", function() {
@@ -172,7 +195,7 @@ gulp.task("sass", function() {
           outputStyle: "compressed"
         })
       )
-      .pipe(autoprefixer({grid:true}))
+      .pipe(autoprefixer({ grid: true }))
       .pipe(gulp.dest(DIST + DIST_CSS));
   } else if (targettype == "stage") {
     return gulp
@@ -194,7 +217,7 @@ gulp.task("sass", function() {
           outputStyle: "expanded"
         })
       )
-      .pipe(autoprefixer({grid:true}))
+      .pipe(autoprefixer({ grid: true }))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(DIST + DIST_CSS));
   } else {
@@ -217,7 +240,7 @@ gulp.task("sass", function() {
           outputStyle: "expanded"
         })
       )
-      .pipe(autoprefixer({grid:true}))
+      .pipe(autoprefixer({ grid: true }))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(DIST + DIST_CSS));
   }
