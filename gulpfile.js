@@ -41,7 +41,9 @@ if (targettype == "stage") {
   console.log("🥚", targettype, "🥚");
 }
 
-// Default
+/**
+ * Default
+ */
 gulp.task("default", () => {
   console.log("🚀", "Build", "🚀");
   runSequence(
@@ -56,7 +58,9 @@ gulp.task("default", () => {
   );
 });
 
-// Watchs
+/**
+ * Watchs
+ */
 gulp.task("watch", function() {
   // gulp.watch(SRC_JS + "**/*.js", ['js']); // webpackStream プラグインのなかで watch している。ここで監視するとエラー発生時に止まってしまう。
   watch(SRC_SCSS + "**/*.scss", function() {
@@ -77,7 +81,9 @@ gulp.task("watch", function() {
   });
 });
 
-// Images
+/**
+ * Images
+ */
 gulp.task("images", function() {
   gulp
     .src(SRC_IMAGES + "**/*.{jpg,jpeg,png,gif,svg}")
@@ -100,17 +106,23 @@ gulp.task("images", function() {
 //     .pipe(gulp.dest(DIST + DIST_IMAGES));
 // });
 
-// Copy
+/**
+ * Copy
+ */
 gulp.task("copy", function() {
   gulp.src("./src/copy/**/*").pipe(gulp.dest(DIST + DIST_COPYFILE));
 });
 
-// Clean
+/**
+ * Clean
+ */
 gulp.task("clean", function(cb) {
   return del(DIST + "*", cb);
 });
 
-// Js
+/**
+ * JavaScript
+ */
 gulp.task("js", () => {
   let MODE = "development";
   let StripKey = "logloglog";
@@ -174,7 +186,9 @@ gulp.task("js", () => {
     .pipe(gulp.dest(DIST));
 });
 
-// Sass
+/**
+ * Sass
+ */
 gulp.task("sass", function() {
   if (targettype == "production") {
     return gulp
@@ -246,7 +260,9 @@ gulp.task("sass", function() {
   }
 });
 
-// Pug
+/**
+ * Pug
+ */
 gulp.task("pug", () => {
   return gulp
     .src([SRC_PUG + "**/*.pug", "!" + SRC_PUG + "**/_*.pug"])
@@ -334,7 +350,9 @@ const pugOptions = {
   }
 };
 
-//Browser Sync
+/**
+ * Browser Sync
+ */
 gulp.task("browser-sync", () => {
   browserSync({
     server: {
