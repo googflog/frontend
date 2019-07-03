@@ -164,6 +164,7 @@ gulp.task("js", () => {
         }
       ]
     },
+    externals: EXTERNALS,
     plugins: [
       new WebpackBuildNotifierPlugin({
         title: "My Project Webpack Build",

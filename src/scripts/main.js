@@ -1,20 +1,13 @@
 //ライブラリ埋め込み
-import $ from "jquery";
-import 'lodash';
+// import $ from "jquery";
+import "lodash";
 import Swiper from "swiper";
-import {
-  TweenMax
-} from "gsap/TweenMax";
+import { TweenMax } from "gsap/TweenMax";
 
 // sub.jsファイルを読み込む
-import {
-  hello
-} from "./_sub";
+import { hello } from "./_sub";
 
-import {
-  MASTER_DATA,
-  SUB_DATA,
-} from './_data';
+import { MASTER_DATA, SUB_DATA } from "./_data";
 
 //その他埋め込み
 import YTPlayer from "./module/_YTPlayer";
@@ -34,7 +27,7 @@ YTPlayer.loadAPI(function() {
     rel: 0,
     showinfo: 0
   });
-})
+});
 
 // WebPack書き出しモード
 console.log("WebPack書き出しモード", process.env.NODE_ENV);
@@ -46,7 +39,7 @@ function testElement(data) {
    * 画像リストのテンプレート
    * @type {string}
    */
-  var tmplSrc = '<div class=<%= Class %>><%= Text %></div>';
+  var tmplSrc = "<div class=<%= Class %>><%= Text %></div>";
   var compiled = _.template(tmplSrc);
   return compiled({
     Class: data.class,
@@ -55,47 +48,60 @@ function testElement(data) {
 }
 
 $(function() {
-
   // Youtube再生
   $(".playbtn").on("click", function(e) {
     e.preventDefault();
     ytp.play();
-  })
+  });
 
   // SNSボタン
   var shareSNS = new ShareSNS();
   var shareSNS = new ShareSNS({
-    twitter: '.js-tw'
+    twitter: ".js-tw"
   });
 
   // Lodashのテンプレート のテンプレート
-  $('body').append(testElement({
-    class: 'testTemp',
-    txt: '🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑'
-  }));
-
+  $("body").append(
+    testElement({
+      class: "testTemp",
+      txt: "🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑 🐏 🐑"
+    })
+  );
 
   // Swiper
-  const swiperKv = new Swiper('.swiper-container', {
+  const swiperKv = new Swiper(".swiper-container", {
     loop: true,
     autoplay: {
-      delay: 4000,
+      delay: 4000
     },
     slidesPerView: 3,
     spaceBetween: 10,
     centeredSlides: true,
     pagination: {
-      el: '.swiper-pagination',
+      el: ".swiper-pagination"
     },
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
     },
     scrollbar: {
-      el: '.swiper-scrollbar',
-    },
+      el: ".swiper-scrollbar"
+    }
   });
 
+  var elm1 = ".img";
+  var twmax = TweenMax.set(elm1, {
+    opacity: 0,
+    scale: 0
+  });
+  TweenMax.to(elm1, 0.6, {
+    opacity: 1,
+    scale: 1,
+    repeat: 3,
+    delay: 0.8,
+    ease: Power0.easeNone,
+    onComplete: function() {}
+  });
 
   /*
 
@@ -158,9 +164,4 @@ $(function() {
 
 
   */
-
-
-
-
-
-})
+});
