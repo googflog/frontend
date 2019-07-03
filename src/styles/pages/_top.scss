@@ -15,7 +15,7 @@ $imgPath: $IMAGES_PATH;
 
   h1 {
     font-size: 48px;
-    @include lh_em(48 , 64);
+    @include lh_em(48, 64);
     @include mq-sp {
       @include fz_vw(48);
     }
@@ -72,11 +72,13 @@ $imgPath: $IMAGES_PATH;
     }
   }
 
-  .img img {
-    width: 500px;
-    padding: 30px 0;
-    @include mq-sp {
-      width: 100%;
+  .img {
+    img {
+      width: 500px;
+      padding: 30px 0;
+      @include mq-sp {
+        width: 100%;
+      }
     }
   }
 

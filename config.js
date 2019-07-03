@@ -49,8 +49,8 @@ WEBPACK_ENTRY = {
 EXTERNALS = [
   {
     // jquery: "$",
-    // TweenMax: "TweenMax",
-    // swiper: "Swiper"
+    // TweenMax: true,
+    // swiper: true
   }
 ];
 

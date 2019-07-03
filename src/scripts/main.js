@@ -89,20 +89,6 @@ $(function() {
     }
   });
 
-  var elm1 = ".img";
-  var twmax = TweenMax.set(elm1, {
-    opacity: 0,
-    scale: 0
-  });
-  TweenMax.to(elm1, 0.6, {
-    opacity: 1,
-    scale: 1,
-    repeat: 3,
-    delay: 0.8,
-    ease: Power0.easeNone,
-    onComplete: function() {}
-  });
-
   /*
 
   //
