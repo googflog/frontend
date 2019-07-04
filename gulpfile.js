@@ -165,14 +165,16 @@ gulp.task("js", () => {
         }
       ]
     },
-    externals: EXTERNALS,
+    externals: [EXTERNALS],
     plugins: [
+      // コンパイル時にアラートを表示
       new WebpackBuildNotifierPlugin({
         title: "My Project Webpack Build",
         logo: SRC_IMAGES + "favicon.png",
         suppressSuccess: "true"
       }),
-      new webpack.optimize.AggressiveMergingPlugin(), //ファイルを細かく分析し、まとめられるところはまとめてコード圧縮
+      //ファイルを細かく分析し、まとめられるところはまとめてコード圧縮
+      new webpack.optimize.AggressiveMergingPlugin(),
       // JQuery / JQueryライブラリのための定義（Jquery絶対使わないってプロジェクトのときは消去）
       new webpack.ProvidePlugin({
         jQuery: "jquery",

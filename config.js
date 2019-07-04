@@ -46,13 +46,11 @@ WEBPACK_ENTRY = {
 };
 
 // モジュール を WebPack の バンドル対象 から外して外部依存させる
-EXTERNALS = [
-  {
-    // jquery: "$"
-    // TweenMax: true,
-    // swiper: true
-  }
-];
+EXTERNALS = {
+  // jquery: "$"
+  // TweenMax: true,
+  // swiper: true
+};
 
 // 共通して使用するライブラリを vendor.js にまとめる
 SPLIT_CHUNKS = true;
