@@ -1,31 +1,31 @@
 // 必要プラグインの読み込み (var gulp = ~ でも可)
-let gulp = require("gulp");
-let webpackStream = require("webpack-stream");
-let webpack = require("webpack");
-let WebpackBuildNotifierPlugin = require("webpack-build-notifier");
-var WebpackStrip = require("strip-loader");
+const gulp = require("gulp");
+const webpackStream = require("webpack-stream");
+const webpack = require("webpack");
+const WebpackBuildNotifierPlugin = require("webpack-build-notifier");
+const WebpackStrip = require("strip-loader");
 const LicenseInfoWebpackPlugin = require("license-info-webpack-plugin").default;
 
-let pug = require("gulp-pug");
-let plumber = require("gulp-plumber");
-let sass = require("gulp-sass");
-let sassVariables = require("gulp-sass-variables");
-let autoprefixer = require("gulp-autoprefixer");
-let sourcemaps = require("gulp-sourcemaps");
-let notify = require("gulp-notify");
-let browserSync = require("browser-sync");
-let runSequence = require("run-sequence");
-let watch = require("gulp-watch");
+const pug = require("gulp-pug");
+const plumber = require("gulp-plumber");
+const sass = require("gulp-sass");
+const sassVariables = require("gulp-sass-variables");
+const autoprefixer = require("gulp-autoprefixer");
+const sourcemaps = require("gulp-sourcemaps");
+const notify = require("gulp-notify");
+const browserSync = require("browser-sync");
+const runSequence = require("run-sequence");
+const watch = require("gulp-watch");
 
-let pngquant = require("imagemin-pngquant");
-let mozjpeg = require("imagemin-mozjpeg");
-let imagemin = require("gulp-imagemin");
+const pngquant = require("imagemin-pngquant");
+const mozjpeg = require("imagemin-mozjpeg");
+const imagemin = require("gulp-imagemin");
 
-let minimist = require("minimist");
-let del = require("del");
+const minimist = require("minimist");
+const del = require("del");
 
 // webpackの設定ファイルの読み込み
-let config = require("./config");
+const config = require("./config");
 
 let argv = minimist(process.argv.slice(2));
 let targettype = argv.env;
