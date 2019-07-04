@@ -4,6 +4,7 @@ let webpackStream = require("webpack-stream");
 let webpack = require("webpack");
 let WebpackBuildNotifierPlugin = require("webpack-build-notifier");
 var WebpackStrip = require("strip-loader");
+const LicenseInfoWebpackPlugin = require("license-info-webpack-plugin").default;
 
 let pug = require("gulp-pug");
 let plumber = require("gulp-plumber");
@@ -172,6 +173,10 @@ gulp.task("js", () => {
         title: "My Project Webpack Build",
         logo: SRC_IMAGES + "favicon.png",
         suppressSuccess: "true"
+      }),
+      // ライセンスコメントを出力
+      new LicenseInfoWebpackPlugin({
+        glob: "{LICENSE,license,License}*"
       }),
       //ファイルを細かく分析し、まとめられるところはまとめてコード圧縮
       new webpack.optimize.AggressiveMergingPlugin(),
