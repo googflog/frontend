@@ -2,7 +2,7 @@
 DIST_SITE_URL = "http://example.com/dev";
 STAGE_SITE_URL = "http://example.com/stage";
 
-// META
+/** META */
 SITE_NAME = "サイトタイトル";
 SITE_URL = "http://example.com/production";
 SITE_DESCRIPTION = "ディスプリプション";
@@ -19,7 +19,7 @@ GA_ID = "UA-111111111111-1";
 
 LANG = "ja";
 
-// 書き出しファイル内パス FilePath
+/** 書き出しファイル内パス FilePath */
 IMAGES_PATH = "/assets/images/";
 IMAGES_PATH_STAG = IMAGES_PATH;
 IMAGES_PATH_PROD = IMAGES_PATH;
@@ -36,10 +36,10 @@ SITE_PATH_HTML = "/";
 SITE_PATH_HTML_STAG = "/stage/";
 SITE_PATH_HTML_PROD = "/";
 
-// Pug Options HTML圧縮
+/** Pug Options HTML圧縮 */
 PUG_PRETTY = true;
 
-// WebPack JS
+/** WebPack JavaScript */
 WEBPACK_ENTRY = {
   "assets/scripts/app": "./src/scripts/main.js",
   "contact/contact": "./src/scripts/pages/contact.js"
@@ -48,30 +48,30 @@ WEBPACK_ENTRY = {
 // モジュール を WebPack の バンドル対象 から外して外部依存させる
 EXTERNALS = [
   {
-    // jquery: "$",
+    // jquery: "$"
     // TweenMax: true,
     // swiper: true
   }
 ];
 
-// とりあえず複製するファイル
+/** とりあえず複製するファイル */
 SRC_COPYFILE = "./src/copy/";
 DIST_COPYFILE = "/";
 
-// 監視 Source
+/** 監視 Source */
 SRC = "./src/";
 SRC_IMAGES = "./src/images/";
 SRC_JS = "./src/scripts/";
 SRC_SCSS = "./src/styles/";
 SRC_PUG = "./src/templates/";
 
-// 書出し Dist
+/** 書出し Dist */
 DIST_IMAGES = "./assets/images/";
 DIST_CSS = "./assets/styles/";
 DIST_HTML = "./";
 
-// JS,CSS キャッシュ防止
 // vendor.js に使っている
 DIST_SCRIPT = "./assets/scripts/";
 
+/** JS,CSS キャッシュ防止 */
 VERSION = ""; //"?v="+ Date.now();
