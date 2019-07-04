@@ -71,4 +71,7 @@ DIST_CSS = "./assets/styles/";
 DIST_HTML = "./";
 
 // JS,CSS キャッシュ防止
+// vendor.js に使っている
+DIST_SCRIPT = "./assets/scripts/";
+
 VERSION = ""; //"?v="+ Date.now();

@@ -137,6 +137,14 @@ gulp.task("js", () => {
     output: {
       filename: "[name].js"
     },
+    optimization: {
+      // 共通して使用するライブラリを vendor.js にまとめる
+      splitChunks: {
+        name: "vendor",
+        filename: DIST_SCRIPT + "vendor.js",
+        chunks: "initial"
+      }
+    },
     module: {
       rules: [
         {
