@@ -137,14 +137,7 @@ gulp.task("js", () => {
     output: {
       filename: "[name].js"
     },
-    optimization: {
-      // 共通して使用するライブラリを vendor.js にまとめる
-      splitChunks: {
-        name: "vendor",
-        filename: DIST_SCRIPT + "vendor.js",
-        chunks: "initial"
-      }
-    },
+    optimization: {},
     module: {
       rules: [
         {
@@ -188,6 +181,16 @@ gulp.task("js", () => {
       })
     ]
   };
+
+  // 共通して使用するライブラリを vendor.js にまとめる
+  if (SPLIT_CHUNKS) {
+    webpackOption.optimization.splitChunks = {
+      name: "vendor",
+      filename: DIST_SCRIPT + "vendor.js",
+      chunks: "initial"
+    };
+  }
+
   gulp
     .src("")
     .pipe(webpackStream(webpackOption, webpack))

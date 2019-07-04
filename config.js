@@ -54,6 +54,9 @@ EXTERNALS = [
   }
 ];
 
+// 共通して使用するライブラリを vendor.js にまとめる
+SPLIT_CHUNKS = true;
+
 /** とりあえず複製するファイル */
 SRC_COPYFILE = "./src/copy/";
 DIST_COPYFILE = "/";
