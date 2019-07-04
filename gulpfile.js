@@ -97,7 +97,7 @@ gulp.task("images", function() {
     )
     .pipe(gulp.dest(DIST + DIST_IMAGES));
   gulp
-    .src(SRC_IMAGES + "**/*.{mp4,mp3,webm}")
+    .src(SRC_IMAGES + "**/*.{mp4,mp3,webm,woff,woff2,eot,ttf,html,json}")
     .pipe(gulp.dest(DIST + DIST_IMAGES));
 });
 // gulp.task("images", function() {
