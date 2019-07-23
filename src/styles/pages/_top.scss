@@ -1,27 +1,27 @@
-
+$targettype: $TARGETTYPE;
 $page_class: page-top;
 $imgPath: $IMAGES_PATH;
 
-.#{$page_class}
-{
+.#{$page_class} {
   // font-size: 1.5rem;
   // background: url($imgPath + 'testn.jpg' ) ;
-  
-  .l-main{
+  .l-main {
     width: 980px;
     margin: 0 auto;
     @include mq-sp {
       width: 100%;
     }
   }
-  h1{
+
+  h1 {
     font-size: 48px;
-      @include lh_em(48 , 64);
+    @include lh_em(48, 64);
     @include mq-sp {
       @include fz_vw(48);
     }
   }
-  .mode{
+
+  .mode {
     font-size: 20px;
     line-height: 1em;
     padding: 0.5em;
@@ -29,30 +29,72 @@ $imgPath: $IMAGES_PATH;
     display: inline-block;
     margin: 10px auto;
     text-align: center;
-    &-development{
+
+    &-development {
       background: yellow;
     }
-    &-stage{
+
+    &-stage {
       background: rgb(71, 216, 255);
     }
-    &-production{
+
+    &-production {
       background: rgb(119, 88, 207);
     }
     @include mq-sp {
       @include fz_vw(20);
     }
-  }
-  .img img{
-    width: 500px;
-    padding: 30px 0;
-    @include mq-sp {
-      width: 100%;
+
+    &-css {
+      position: relative;
+
+      &:before {
+        content: $targettype;
+      }
+    }
+
+    @if $targettype == "development" {
+      &-css {
+        background: yellow;
+      }
+    }
+
+    @if $targettype == "stage" {
+      &-css {
+        background: rgb(71, 216, 255);
+      }
+    }
+
+    @if $targettype == "production" {
+      &-css {
+        background: rgb(119, 88, 207);
+      }
     }
   }
-  
-  ul{
+
+  .img {
+    img {
+      width: 500px;
+      padding: 30px 0;
+      @include mq-sp {
+        width: 100%;
+      }
+    }
+  }
+
+  ul {
     margin: 30px 0;
     display: flex;
     justify-content: space-between;
+  }
+
+  // Swiper
+  .swiper-container {
+    width: 600px;
+    height: 300px;
+
+    img {
+      width: 100%;
+    }
   }
 }

@@ -1,18 +1,17 @@
-//アセットルート、テンプレートルートですトスr−と
-
+//
 DIST_SITE_URL = "http://example.com/dev";
 STAGE_SITE_URL = "http://example.com/stage";
 
-// META
+/** META */
 SITE_NAME = "サイトタイトル";
 SITE_URL = "http://example.com/production";
 SITE_DESCRIPTION = "ディスプリプション";
 SITE_KEYWORDS = "キーワード,キーワード,キーワード";
-SITE_OGP_URL = "http://example.com/production";
-SITE_OGP_TITLE = "サイトタイトル";
-SITE_OGP_DESCRIPTION = "ディスプリプション";
+SITE_OGP_URL = SITE_URL;
+SITE_OGP_TITLE = SITE_NAME;
+SITE_OGP_DESCRIPTION = SITE_DESCRIPTION;
 SITE_OGP_IMAGE = "ogp.png";
-SITE_OGP_SITE_NAME = "サイトタイトル";
+SITE_OGP_SITE_NAME = SITE_NAME;
 SITE_OGP_TYPE = "article";
 SITE_OGP_LOCALE = "ja_JP";
 SITE_OGP_APP_ID = "";
@@ -20,8 +19,7 @@ GA_ID = "UA-111111111111-1";
 
 LANG = "ja";
 
-
-// 書き出しファイル内パス FilePath
+/** 書き出しファイル内パス FilePath */
 IMAGES_PATH = "/assets/images/";
 IMAGES_PATH_STAG = IMAGES_PATH;
 IMAGES_PATH_PROD = IMAGES_PATH;
@@ -34,31 +32,47 @@ CSS_PATH = "/assets/styles/";
 CSS_PATH_STAG = CSS_PATH;
 CSS_PATH_PROD = CSS_PATH;
 
+SITE_PATH_HTML = "/";
+SITE_PATH_HTML_STAG = "/stage/";
+SITE_PATH_HTML_PROD = "/";
 
-// Pug Options HTML圧縮
-PUG_PRETTY = true
+/** Pug Options HTML圧縮 */
+PUG_PRETTY = true;
 
-// WebPack JS
+/** WebPack JavaScript */
 WEBPACK_ENTRY = {
   "assets/scripts/app": "./src/scripts/main.js",
   "contact/contact": "./src/scripts/pages/contact.js"
-}
+};
 
-// とりあえず複製するファイル
-SRC_COPYFILE = './src/copy/';
-DIST_COPYFILE = '/';
+// モジュール を WebPack の バンドル対象 から外して外部依存させる
+EXTERNALS = {
+  // jquery: "$"
+  // TweenMax: true,
+  // swiper: true
+};
 
-// 監視 Source
-SRC = './src/';
-SRC_IMAGES = './src/images/';
-SRC_JS = './src/scripts/';
-SRC_SCSS = './src/styles/';
-SRC_PUG = './src/templates/';
+// 共通して使用するライブラリを vendor.js にまとめる
+SPLIT_CHUNKS = true;
 
-// 書出し Dist
-DIST_IMAGES = './assets/images/';
-DIST_CSS = './assets/styles/';
-DIST_HTML = './';
+/** とりあえず複製するファイル */
+SRC_COPYFILE = "./src/copy/";
+DIST_COPYFILE = "/";
 
-// JS,CSS キャッシュ防止
-VERSION = "?v="+ Date.now();
+/** 監視 Source */
+SRC = "./src/";
+SRC_IMAGES = "./src/images/";
+SRC_JS = "./src/scripts/";
+SRC_SCSS = "./src/styles/";
+SRC_PUG = "./src/templates/";
+
+/** 書出し Dist */
+DIST_IMAGES = "./assets/images/";
+DIST_CSS = "./assets/styles/";
+DIST_HTML = "./";
+
+// vendor.js に使っている
+DIST_SCRIPT = "./assets/scripts/";
+
+/** JS,CSS キャッシュ防止 */
+VERSION = ""; //"?v="+ Date.now();

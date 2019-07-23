@@ -1,9 +1,6 @@
 {
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "gulp --env development",
     "dev": "gulp --env development",
     "stage": "gulp --env stage",
     "production": "gulp --env production"
@@ -16,6 +13,7 @@
     "browser-sync": "^2.24.5",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
+    "gulp-imagemin": "^6.0.0",
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.0",
     "gulp-pug": "^4.0.1",
@@ -23,11 +21,12 @@
     "gulp-sass-variables": "^1.2.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-watch": "^5.0.1",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "license-info-webpack-plugin": "^2.0.0",
     "minimist": "^1.2.0",
     "run-sequence": "^2.2.1",
-    "vue-loader": "^15.6.2",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.6",
+    "strip-loader": "^0.1.2",
     "webpack": "^4.13.0",
     "webpack-build-notifier": "^0.1.27",
     "webpack-cli": "^3.0.8",
@@ -38,7 +37,8 @@
     "del": "^3.0.0",
     "gsap": "^2.0.1",
     "jquery": "^3.3.1",
-    "vue": "^2.6.6"
+    "lodash": "^4.17.11",
+    "swiper": "^4.5.0"
   },
   "private": true
 }
