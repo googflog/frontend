@@ -24,8 +24,6 @@ const imagemin = require("gulp-imagemin");
 const minimist = require("minimist");
 const del = require("del");
 
-let VueLoaderPlugin = require("vue-loader/lib/plugin"); // vue-loader
-
 // webpackの設定ファイルの読み込み
 const config = require("./config");
 

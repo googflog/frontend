@@ -4,7 +4,6 @@ import "lodash";
 import Swiper from "swiper";
 import { TweenMax } from "gsap/TweenMax";
 
-import Vue from "vue";
 // sub.jsファイルを読み込む
 import { hello } from "./_sub";
 
