@@ -41,8 +41,8 @@ PUG_PRETTY = true;
 
 /** WebPack JavaScript */
 WEBPACK_ENTRY = {
-  "assets/scripts/app": "./src/scripts/main.js",
-  "contact/contact": "./src/scripts/pages/contact.js"
+  "assets/scripts/app": "./src/scripts/main.js"
+  // "contact/contact": "./src/scripts/pages/contact.js"
 };
 
 // モジュール を WebPack の バンドル対象 から外して外部依存させる

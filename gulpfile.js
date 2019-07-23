@@ -24,6 +24,8 @@ const imagemin = require("gulp-imagemin");
 const minimist = require("minimist");
 const del = require("del");
 
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+
 // webpackの設定ファイルの読み込み
 const config = require("./config");
 
@@ -142,6 +144,18 @@ gulp.task("js", () => {
     module: {
       rules: [
         {
+          test: /\.vue$/, // ファイルが.vueで終われば...
+          loader: "vue-loader" // vue-loaderを使う
+        },
+        {
+          test: /\.css$/,
+          use: ["vue-style-loader", "css-loader"] // css-loader -> vue-style-loaderの順で通していく
+        },
+        {
+          test: /\.scss$/,
+          use: ["vue-style-loader", "css-loader"] // css-loader -> vue-style-loaderの順で通していく
+        },
+        {
           test: /\.js$/,
           use: [
             {
@@ -166,8 +180,17 @@ gulp.task("js", () => {
         }
       ]
     },
+    resolve: {
+      // import './foo.vue' の代わりに import './foo' と書けるようになる(拡張子省略)
+      extensions: [".js", ".vue"],
+      alias: {
+        // vue-template-compilerに読ませてコンパイルするために必要
+        vue$: "vue/dist/vue.esm.js"
+      }
+    },
     externals: [EXTERNALS],
     plugins: [
+      new VueLoaderPlugin(),
       // コンパイル時にアラートを表示
       new WebpackBuildNotifierPlugin({
         title: "My Project Webpack Build",
